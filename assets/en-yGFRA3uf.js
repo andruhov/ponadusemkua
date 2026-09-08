@@ -1,0 +1,1 @@
+import{t as e}from"./home-page-CdaJQGqb.js";import{a as t}from"./index-DU5fGmNX.js";var n=t();function r(){return(0,n.jsx)(e,{locale:`en`})}export{r as component};

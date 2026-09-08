@@ -1,0 +1,1 @@
+import{a as e,i as t}from"./index-DU5fGmNX.js";var n=e(),r=()=>(0,n.jsx)(t,{to:`/en`});export{r as component};

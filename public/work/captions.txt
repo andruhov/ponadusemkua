@@ -1,0 +1,26 @@
+# Підписи розділу «Наша робота»
+#
+# Формат: n | uk | en | url_uk | url_en
+# n = номер фото в сітці (1 = перше після сортування за назвою)
+
+n | uk | en | url_uk | url_en
+1 | Картриджі для військових | Printer cartridges for the military | https://t.me/PonaduseMkUa/5221 |
+2 | Картриджі для військових | Printer cartridges for the military | https://t.me/PonaduseMkUa/5221 |
+3 | Допомога від Укрпошти дісталася до бійців | Ukrposhta aid reached the soldiers | https://t.me/PonaduseMkUa/5220 |
+4 | Подяка від бійців | Thanks from the soldiers | https://t.me/PonaduseMkUa/5220 |
+5 | Передана допомога | Delivered aid | https://t.me/PonaduseMkUa/5220 |
+6 | Фотозвіт від бійця | Photo report from a soldier | https://t.me/PonaduseMkUa/5209 |
+7 | Допомога від волонтерів Укрпошти | Aid from Ukrposhta volunteers | https://t.me/PonaduseMkUa/5206 |
+8 | Допомога від волонтерів Укрпошти | Aid from Ukrposhta volunteers | https://t.me/PonaduseMkUa/5206 |
+9 | Допомога від волонтерів Укрпошти | Aid from Ukrposhta volunteers | https://t.me/PonaduseMkUa/5206 |
+10 | Медицина та мийні засоби | Medicine and cleaning supplies | https://t.me/PonaduseMkUa/5205 |
+11 | Гігієна та продукти на Херсонський напрямок | Hygiene and food for the Kherson direction | https://t.me/PonaduseMkUa/5202 |
+12 | Ковдри для бійців | Blankets for the soldiers | https://t.me/PonaduseMkUa/5182 |
+13 | Ковдри для бійців | Blankets for the soldiers | https://t.me/PonaduseMkUa/5182 |
+14 | Гігієна та медицина | Hygiene and medical supplies | https://t.me/PonaduseMkUa/5178 |
+15 | Передача допомоги | Aid delivery | https://t.me/PonaduseMkUa/5178 |
+16 | Медицина та батончики | Medical supplies and energy bars | https://t.me/PonaduseMkUa/5178 |
+17 | Пакунки допомоги | Aid packages | https://t.me/PonaduseMkUa/5178 |
+18 | Завантажена волонтерська автівка | Loaded volunteer van | https://t.me/PonaduseMkUa/5159 |
+19 | Завантажена волонтерська автівка | Loaded volunteer van | https://t.me/PonaduseMkUa/5159 |
+20 | Завантажена волонтерська автівка | Loaded volunteer van | https://t.me/PonaduseMkUa/5159 |

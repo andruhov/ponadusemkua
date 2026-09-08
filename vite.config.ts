@@ -10,6 +10,8 @@ import { nitro } from "nitro/vite";
 import { grokPwaPlugin } from "./scripts/grok-pwa-plugin.mjs";
 // @ts-expect-error JS plugin alongside the TS vite config
 import { appEnvPlugin } from "./scripts/app-env-plugin.mjs";
+// @ts-expect-error JS plugin alongside the TS vite config
+import { galleryPlugin } from "./scripts/gallery-plugin.mjs";
 import { isMigrationFile } from "./scripts/migration-plan.mjs";
 
 /** The files `src/lib/db.ts` globs — same directory, same non-recursive scope. */
@@ -146,6 +148,7 @@ function authPopupPlugin(): Plugin {
 // The dev server starts once `src/router.tsx` and `src/routes/` exist — see
 // AGENTS.md § "First scaffold".
 export default defineConfig(({ command, isPreview }) => ({
+  base: process.env.GITHUB_PAGES_BASE || (process.env.GITHUB_PAGES === "1" ? "/ponadusemkua/" : "/"),
   server: {
     host: "0.0.0.0",
     port: 8080,
@@ -165,8 +168,15 @@ export default defineConfig(({ command, isPreview }) => ({
     appEnvPlugin(),
     // PWA head + ?install=1 tutorial page; runs before Start/Nitro.
     grokPwaPlugin(),
+    galleryPlugin(),
     tailwindcss(),
-    tanstackStart(),
+    tanstackStart({
+      pages: [
+        { path: "/", prerender: { enabled: true } },
+        { path: "/en", prerender: { enabled: true } },
+        { path: "/eng", prerender: { enabled: true } },
+      ],
+    }),
     ...(command === "build" || isPreview
       ? [
           nitro({

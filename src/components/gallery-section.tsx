@@ -6,7 +6,7 @@ import { asset, cn } from "@/lib/utils";
 
 export function GallerySection({ locale }: { locale: Locale }) {
   const c = t(locale);
-  const images = workImages;
+  const images = workImages.slice(0, 12);
   const [open, setOpen] = useState<number | null>(null);
 
   useEffect(() => {

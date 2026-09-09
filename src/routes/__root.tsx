@@ -2,21 +2,18 @@ import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-r
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { Toaster } from "sonner";
+import { t } from "@/lib/content";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "Миколаїв понад усе";
+const uk = t("uk");
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: APP_NAME },
-      {
-        name: "description",
-        content:
-          "ГО «Миколаїв понад усе» — волонтери Миколаєва. Допомога цивільним, переселенцям і військовим.",
-      },
+      { title: uk.short },
+      { name: "description", content: uk.metaDescription },
       { name: "theme-color", content: "#0e1216" },
     ],
     links: [

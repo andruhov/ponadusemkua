@@ -1,0 +1,18 @@
+// Соцмережі в підвалі сайту.
+//
+// id     — ключ іконки: telegram | x | facebook | instagram | tiktok | mastodon
+//          (інше id покаже загальну іконку-глобус).
+// label  — текст на кнопці (одна мова, назва мережі).
+// href   — повне посилання, з https://
+//
+// Порядок у списку = порядок кнопок зліва направо.
+// Щоб прибрати мережу — видаліть увесь об’єкт { … }.
+
+[
+  { "id": "telegram", "label": "Telegram", "href": "https://t.me/PonaduseMkUa" },
+  { "id": "x", "label": "X", "href": "https://twitter.com/ponadusemkua" },
+  { "id": "facebook", "label": "Facebook", "href": "https://www.facebook.com/PonaduseMkUa" },
+  { "id": "instagram", "label": "Instagram", "href": "https://www.instagram.com/ponadusemkua" },
+  { "id": "tiktok", "label": "TikTok", "href": "https://www.tiktok.com/@ponadusemkua" },
+  { "id": "mastodon", "label": "Mastodon", "href": "https://mastodon.social/@ponadusemkua" }
+]

@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Generated from public/slideshow and public/work — do not edit.
+// Generated from public/slideshow, public/work and content/gallery-captions.txt — do not edit.
 export type GalleryFile = {
   src: string;
   name: string;

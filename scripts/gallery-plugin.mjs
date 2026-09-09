@@ -16,37 +16,44 @@ function listImages(dir, urlPrefix) {
 }
 
 function readCaptions(file) {
-  const map = new Map();
-  if (!fs.existsSync(file)) return map;
+  const byName = new Map();
+  const byIndex = new Map();
+  if (!fs.existsSync(file)) return { byName, byIndex };
   const text = fs.readFileSync(file, "utf8");
   for (const raw of text.split(/\r?\n/)) {
     const line = raw.trim();
     if (!line || line.startsWith("#")) continue;
     const parts = line.split("|").map((s) => s.trim());
     if (parts.length < 2) continue;
-    if (parts[0] === "n") continue;
-    const n = Number(parts[0]);
-    if (!Number.isInteger(n) || n < 1) continue;
-    map.set(n, {
+    if (parts[0] === "n" || parts[0] === "ім'я-файлу.jpg") continue;
+    const cap = {
       captionUk: parts[1] ?? "",
       captionEn: parts[2] ?? "",
       urlUk: parts[3] ?? "",
       urlEn: parts[4] ?? "",
-    });
+    };
+    const key = parts[0];
+    const n = Number(key);
+    if (Number.isInteger(n) && n >= 1 && !key.includes(".")) {
+      byIndex.set(n, cap);
+    } else {
+      byName.set(key, cap);
+    }
   }
-  return map;
+  return { byName, byIndex };
 }
 
 export function writeGalleryManifest(root) {
   const slideshowDir = path.join(root, "public/slideshow");
   const workDir = path.join(root, "public/work");
+  const captionsFile = path.join(root, "content/gallery-captions.txt");
   fs.mkdirSync(slideshowDir, { recursive: true });
   fs.mkdirSync(workDir, { recursive: true });
 
   const slideshowImages = listImages(slideshowDir, "/slideshow");
-  const captions = readCaptions(path.join(workDir, "captions.txt"));
+  const { byName, byIndex } = readCaptions(captionsFile);
   const workImages = listImages(workDir, "/work").map((img, i) => {
-    const cap = captions.get(i + 1) ?? {};
+    const cap = byName.get(img.name) ?? byIndex.get(i + 1) ?? {};
     return {
       ...img,
       n: i + 1,
@@ -60,7 +67,7 @@ export function writeGalleryManifest(root) {
   const out = path.join(root, "src/lib/gallery.gen.ts");
   const body =
     `/* eslint-disable */\n` +
-    `// Generated from public/slideshow and public/work — do not edit.\n` +
+    `// Generated from public/slideshow, public/work and content/gallery-captions.txt — do not edit.\n` +
     `export type GalleryFile = {\n` +
     `  src: string;\n` +
     `  name: string;\n` +
@@ -90,14 +97,18 @@ export function galleryPlugin() {
     configureServer(server) {
       const slideshowDir = path.join(server.config.root, "public/slideshow");
       const workDir = path.join(server.config.root, "public/work");
+      const captionsFile = path.join(server.config.root, "content/gallery-captions.txt");
+      const contentDir = path.join(server.config.root, "content");
       fs.mkdirSync(slideshowDir, { recursive: true });
       fs.mkdirSync(workDir, { recursive: true });
       server.watcher.add(slideshowDir);
       server.watcher.add(workDir);
+      server.watcher.add(contentDir);
       const onFs = (file) => {
         const inSlide = !path.relative(slideshowDir, file).startsWith("..");
         const inWork = !path.relative(workDir, file).startsWith("..");
-        if (!inSlide && !inWork) return;
+        const isCaptions = path.resolve(file) === path.resolve(captionsFile);
+        if (!inSlide && !inWork && !isCaptions) return;
         writeGalleryManifest(server.config.root);
         server.ws.send({ type: "full-reload" });
       };

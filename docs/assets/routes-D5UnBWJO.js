@@ -1,0 +1,1 @@
+import{t as e}from"./home-page-DtOxfsDJ.js";import{a as t}from"./index-DzX585Vr.js";var n=t();function r(){return(0,n.jsx)(e,{locale:`uk`})}export{r as component};

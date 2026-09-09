@@ -1,0 +1,123 @@
+// Тексти сторінки (українською та англійською).
+//
+// Формат кожного напису:
+//   "ключ": { "uk": "…", "en": "…" }
+//
+// Правила:
+// - Міняйте лише рядки в лапках. Ключі (org, short, kicker…) лишайте як є —
+//   на них посилається верстка.
+// - Завжди заповнюйте і uk, і en. Це не обов’язково дослівний переклад:
+//   англійський aboutP2 зараз інший за змістом — так і задумано.
+// - Не видаляйте коми між полями. Кома після останнього поля дозволена.
+
+{
+  // Назва організації: коротка в шапці/герої, повна в підвалі.
+  "org": { "uk": "ГО «Миколаїв понад усе»", "en": "NGO “Mykolaiv First”" },
+  "short": { "uk": "Миколаїв понад усе", "en": "Mykolaiv First" },
+
+  // Опис для пошуковиків і прев’ю посилання (мета-тег).
+  "metaDescription": {
+    "uk": "ГО «Миколаїв понад усе» — волонтери Миколаєва. Допомога цивільним, переселенцям і військовим.",
+    "en": "NGO “Mykolaiv First” — volunteers from Mykolaiv, Ukraine. Aid for civilians, displaced people, and soldiers."
+  },
+
+  // Герой (перший екран поверх слайдшоу).
+  "kicker": {
+    "uk": "Громадська організація волонтерів",
+    "en": "A volunteer group from Mykolaiv, Ukraine"
+  },
+  "lede": {
+    "uk": "Допомагаємо цивільним і переселенцям. Закуповуємо спорядження для військових, які захищають нашу країну.",
+    "en": "We help civilians and displaced people survive the war, and we buy life-saving equipment for those who defend the city."
+  },
+  "heroCta": { "uk": "Підтримати", "en": "Donate" },
+  "heroWork": { "uk": "Наша робота", "en": "Our work" },
+
+  // Розділ «Хто ми».
+  "aboutTitle": { "uk": "Хто ми", "en": "Who we are" },
+  "aboutP1": {
+    "uk": "«Миколаїв понад усе» — громадське об’єднання миколаївських волонтерів. Ми допомагаємо цивільним та переселенцям, а також купуємо необхідне спорядження для військових, які захищають нашу країну.",
+    "en": "“Mykolaiv First” (Миколаїв понад усе) is a local group of volunteers from Mykolaiv, Ukraine. We help people who remain in the Mykolaiv region to survive the hardships of war. We also provide much needed equipment to the defenders of the city."
+  },
+  "aboutP2": {
+    "uk": "Все це ми робимо завдяки матеріальній підтримці від небайдужих людей з України та інших куточків світу. Завдяки вам. Ми не впораємось без вас.",
+    "en": "Mykolaiv sits near the southern front. The city was shelled for a long time with artillery and missiles, including banned cluster munitions. Ukrainian forces pushed the occupiers back beyond the Dnipro — but civilians and soldiers still need support: vests, helmets, medical kits, and the logistics that keep aid moving."
+  },
+  "quote": {
+    "uk": "Ваші пожертви можуть буквально врятувати комусь життя.",
+    "en": "Your donations can — and will — save lives. Literally."
+  },
+
+  // Розділ «Наша робота» (сітка фото).
+  "workTitle": { "uk": "Наша робота", "en": "Our work" },
+  "workLead": {
+    "uk": "Фотозвіти з виїздів і передач допомоги. Підпис під знімком відкриває відповідний допис у Telegram.",
+    "en": "Photo reports from our deliveries. Each caption opens the matching Telegram post."
+  },
+  "emptyGallery": {
+    "uk": "Покладіть фотографії у папку public/work — і тут з’явиться сітка.",
+    "en": "Add photographs to the public/work folder and they will appear here."
+  },
+  "seeMore": { "uk": "Дивитися більше", "en": "See more" },
+
+  // Соцмережі (підвал). Самі посилання — у socials.jsonc.
+  "socialTitle": { "uk": "Соцмережі", "en": "Social" },
+  "socialLead": {
+    "uk": "Звіти по зборах і закупівлях ми викладаємо на наших сторінках. Підпишіться, щоб не пропустити важливе.",
+    "en": "Most posts are in Ukrainian; automatic translation should help. This is where we publish purchase reports."
+  },
+  "thanks": {
+    "uk": "Дякуємо всім, хто допомагає та підтримує.",
+    "en": "Thank you for your help and support."
+  },
+
+  // Розділ банок Monobank.
+  "jarsTitle": { "uk": "На що збираємо зараз", "en": "What we are raising now" },
+  "jarsLead": {
+    "uk": "Звіти по зборах і закупівлях викладаємо в соцмережах. Відкрийте банку, щоб допомогти конкретному напрямку.",
+    "en": "We publish reports on our social pages. Open a jar to support a specific need."
+  },
+  "openJar": { "uk": "Відкрити банку", "en": "Open jar" },
+
+  // Розділ реквізитів (вкладки).
+  "donateTitle": { "uk": "Реквізити", "en": "How to help" },
+  "donateLead": {
+    "uk": "Картки, банківські рахунки або крипта — оберіть зручний спосіб.",
+    "en": "Cards, bank wire, or crypto — use whichever is easiest."
+  },
+  "tabCards": { "uk": "Картки", "en": "Cards" },
+  "tabBank": { "uk": "Рахунки", "en": "Bank" },
+  "tabCrypto": { "uk": "Крипта", "en": "Crypto" },
+  "tabAnon": { "uk": "Анонімно", "en": "Anonymous" },
+  "bankLead": {
+    "uk": "Реквізити рахунків у PDF — USD, EUR і гривня.",
+    "en": "Bank details as PDF — USD, EUR and hryvnia."
+  },
+  "downloadPdf": { "uk": "Завантажити", "en": "Download" },
+  "cryptoLead": {
+    "uk": "Натисніть рядок, щоб скопіювати адресу.",
+    "en": "Tap a row to copy the address."
+  },
+  "anonLead": {
+    "uk": "Monero — для переказів без публічної історії.",
+    "en": "Monero — for transfers without a public history."
+  },
+
+  // Шапка, меню, підписи кнопок інтерфейсу.
+  "navAbout": { "uk": "Про нас", "en": "About" },
+  "navWork": { "uk": "Робота", "en": "Work" },
+  "navJars": { "uk": "Збори", "en": "Funds" },
+  "navDonate": { "uk": "Реквізити", "en": "Details" },
+  "menu": { "uk": "Меню", "en": "Menu" },
+  "close": { "uk": "Закрити", "en": "Close" },
+  "prev": { "uk": "Попереднє фото", "en": "Previous photo" },
+  "next": { "uk": "Наступне фото", "en": "Next photo" },
+  "pause": { "uk": "Пауза", "en": "Pause" },
+  "play": { "uk": "Відтворити", "en": "Play" },
+  "closePhoto": { "uk": "Закрити фото", "en": "Close photo" },
+  "copy": { "uk": "Копіювати", "en": "Copy" },
+  "copied": { "uk": "Скопійовано", "en": "Copied" },
+  "langUk": { "uk": "UKR", "en": "UKR" },
+  "langEn": { "uk": "ENG", "en": "ENG" },
+  "skip": { "uk": "До змісту", "en": "Skip to content" },
+}

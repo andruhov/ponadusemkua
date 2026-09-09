@@ -1,0 +1,85 @@
+// Реквізити для донатів. Після зміни номера картки чи адреси гаманця
+// збережіть файл — на сайті з’явиться нове значення.
+//
+// jars     — банки Monobank (кнопка «Відкрити банку»).
+// cards    — номери карток / PayPal / WISE (вкладка «Картки»).
+// bankPdfs — PDF з банківськими реквізитами в public/pdf/.
+// crypto   — адреси гаманців (вкладка «Крипта»).
+// monero   — окремий рядок для вкладки «Анонімно».
+//
+// id у jars має бути унікальним латинськими літерами (military, nets…).
+// value копіюється в буфер одним кліком — без пробілів у крипті.
+
+{
+  "jars": [
+    {
+      "id": "military",
+      "href": "https://send.monobank.ua/jar/rnLJ4edAw",
+      "title": { "uk": "Військовий збір", "en": "Military fund" },
+      "text": {
+        "uk": "Термінові запити від військових: спорядження, медицина, техніка.",
+        "en": "Urgent requests from Ukrainian soldiers: gear, medicine, equipment."
+      }
+    },
+    {
+      "id": "nets",
+      "href": "https://send.monobank.ua/jar/4uqZoMUH2g",
+      "title": { "uk": "Маскувальні сітки", "en": "Camouflage nets" },
+      "text": {
+        "uk": "Матеріали для сіток, які плетуть наші волонтерки.",
+        "en": "Materials for the camouflage nets our volunteers weave."
+      }
+    },
+    {
+      "id": "warehouse",
+      "href": "https://send.monobank.ua/jar/4qggc3HihU",
+      "title": { "uk": "Оренда складу", "en": "Warehouse rent" },
+      "text": {
+        "uk": "Склад, з якого ми розподіляємо гуманітарну допомогу.",
+        "en": "Storage from which we sort and distribute humanitarian aid."
+      }
+    },
+    {
+      "id": "fuel",
+      "href": "https://send.monobank.ua/jar/2h1pHxeRVW",
+      "title": { "uk": "Пальне і логістика", "en": "Fuel and logistics" },
+      "text": {
+        "uk": "Пальне для волонтерських автівок та інші витрати на доставку.",
+        "en": "Fuel for volunteer vehicles and other delivery costs."
+      }
+    },
+    {
+      "id": "civilians",
+      "href": "https://send.monobank.ua/jar/29Z7ZfHdMe",
+      "title": { "uk": "Допомога цивільним", "en": "Help for civilians" },
+      "text": {
+        "uk": "Їжа та необхідне для мешканців області і переселенців.",
+        "en": "Food and essentials for locals and internally displaced people."
+      }
+    }
+  ],
+
+  "cards": [
+    { "label": { "uk": "Monobank", "en": "Monobank" }, "value": "4441 1111 3551 7120" },
+    { "label": { "uk": "ПриватБанк", "en": "PrivatBank" }, "value": "5363 5420 9315 6314" },
+    { "label": { "uk": "PayPal", "en": "PayPal" }, "value": "pangik@proton.me" },
+    { "label": { "uk": "WISE", "en": "WISE" }, "value": "pangik@proton.me" }
+  ],
+
+  // href — шлях від кореня сайту, файли лежать у public/pdf/.
+  "bankPdfs": [
+    { "code": "USD", "href": "/pdf/USD.pdf" },
+    { "code": "EUR", "href": "/pdf/EUR.pdf" },
+    { "code": "UAH", "href": "/pdf/UAH.pdf" }
+  ],
+
+  "crypto": [
+    { "label": { "uk": "Bitcoin", "en": "Bitcoin" }, "value": "bc1q4wr2h4a004k9ecx78e52gcmt4ay0ru3754apct" },
+    { "label": { "uk": "Ethereum (ERC-20)", "en": "Ethereum (ERC-20 tokens)" }, "value": "0x944cb6f880e6ba6311469287d187ed6130796a25" },
+    { "label": { "uk": "TRON (TRC-20)", "en": "TRON (TRC-20 tokens)" }, "value": "TZ1sXaZf3cW9epXpGPSc2J7Q277qodp3qU" },
+    { "label": { "uk": "Solana", "en": "Solana" }, "value": "CjMwthqp4d7pMKRCzLon7t3bem3xx1UHF8D3KV9C5TFS" },
+    { "label": { "uk": "Binance (будь-яка крипта)", "en": "Binance (any crypto)" }, "value": "pangik@proton.me" }
+  ],
+
+  "monero": "48KzDUcSkgQ7yoyF1L365SfoL2FCCnRDz8HiccmzuUfZXjmfSnzuDSZH7JnekficJTBjgtUi4WYs5XnDXEY2uR1SEQaoF5g"
+}

@@ -120,16 +120,18 @@ export function DonateSection({ locale }: { locale: Locale }) {
           ) : null}
 
           {tab === "crypto" ? (
-            <div className="grid gap-2">
-              <p className="mb-2 text-sm text-muted">{c.cryptoLead}</p>
-              {cryptoWallets.map((row) => (
-                <CopyRow
-                  key={row.value}
-                  locale={locale}
-                  label={row.label[locale]}
-                  value={row.value}
-                />
-              ))}
+            <div>
+              <p className="mb-4 text-sm text-muted">{c.cryptoLead}</p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {cryptoWallets.map((row) => (
+                  <CopyRow
+                    key={row.value}
+                    locale={locale}
+                    label={row.label[locale]}
+                    value={row.value}
+                  />
+                ))}
+              </div>
             </div>
           ) : null}
 

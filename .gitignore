@@ -8,6 +8,7 @@ node_modules/
 .nitro
 .tanstack
 dist
+docs/
 *.log
 .DS_Store
 screenshots

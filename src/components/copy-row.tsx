@@ -1,5 +1,5 @@
 import { Check, Copy } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import type { Locale } from "@/lib/content";
 import { t } from "@/lib/content";
@@ -14,16 +14,20 @@ export function CopyRow({
   locale: Locale;
 }) {
   const [done, setDone] = useState(false);
+  const timer = useRef<number>(0);
   const c = t(locale);
+
+  useEffect(() => () => window.clearTimeout(timer.current), []);
 
   async function onCopy() {
     try {
       await navigator.clipboard.writeText(normalize(value));
       setDone(true);
       toast.success(c.copied);
-      window.setTimeout(() => setDone(false), 1600);
+      window.clearTimeout(timer.current);
+      timer.current = window.setTimeout(() => setDone(false), 1600);
     } catch {
-      toast.error(c.copy);
+      toast.error(c.copyFailed);
     }
   }
 

@@ -1,8 +1,10 @@
 @import "tailwindcss";
+@import "@fontsource-variable/manrope";
+@import "@fontsource-variable/literata/opsz.css";
 
 @theme {
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Literata", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Literata Variable", "Iowan Old Style", Georgia, "Times New Roman", serif;
 
   --color-bg: #0e1216;
   --color-surface: #171d24;

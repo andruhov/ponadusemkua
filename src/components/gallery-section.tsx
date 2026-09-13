@@ -1,12 +1,16 @@
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { NewWindow } from "@/components/new-window";
 import { captionFor, urlFor, workImages, type WorkFile } from "@/lib/gallery";
-import { socials, t, type Locale } from "@/lib/content";
+import { telegramHref, t, type Locale } from "@/lib/content";
 import { asset, cn } from "@/lib/utils";
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
 export function GallerySection({ locale }: { locale: Locale }) {
   const c = t(locale);
-  const images = workImages.slice(0, 12);
+  const images = workImages;
   const [open, setOpen] = useState<number | null>(null);
 
   useEffect(() => {
@@ -49,6 +53,7 @@ export function GallerySection({ locale }: { locale: Locale }) {
                   <button
                     type="button"
                     onClick={() => setOpen(i)}
+                    aria-label={caption ? `${c.openPhoto}: ${caption}` : c.openPhoto}
                     className="group relative block aspect-photo w-full overflow-hidden rounded-md bg-surface"
                   >
                     <img
@@ -68,6 +73,7 @@ export function GallerySection({ locale }: { locale: Locale }) {
                       >
                         <span className="min-w-0 flex-1">{caption}</span>
                         <ArrowUpRight className="mt-0.5 size-4 shrink-0 text-muted" />
+                        <NewWindow locale={locale} />
                       </a>
                     ) : (
                       <p className="mt-3 text-sm leading-snug text-muted">{caption}</p>
@@ -81,13 +87,14 @@ export function GallerySection({ locale }: { locale: Locale }) {
 
         <div className="mt-8">
           <a
-            href={socials[0].href}
+            href={telegramHref}
             target="_blank"
             rel="noreferrer"
             className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-fg hover:text-accent"
           >
             {c.seeMore}
             <ArrowUpRight className="size-4" />
+            <NewWindow locale={locale} />
           </a>
         </div>
       </div>
@@ -121,8 +128,41 @@ function Lightbox({
   const c = t(locale);
   const caption = captionFor(image, locale);
   const url = urlFor(image, locale);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+    const node = dialogRef.current;
+    if (!node) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const list = Array.from(node.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
+        (el) => !el.hasAttribute("disabled") && el.tabIndex !== -1,
+      );
+      if (list.length === 0) return;
+      const first = list[0];
+      const last = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    node.addEventListener("keydown", onKey);
+    return () => {
+      node.removeEventListener("keydown", onKey);
+      previouslyFocused.current?.focus();
+    };
+  }, []);
+
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label={caption || c.workTitle}
@@ -141,12 +181,14 @@ function Lightbox({
             >
               <span className="truncate">{caption}</span>
               <ArrowUpRight className="size-4 shrink-0" />
+              <NewWindow locale={locale} />
             </a>
           ) : (
             <p className="truncate text-sm text-muted">{caption}</p>
           )}
         </div>
         <button
+          ref={closeRef}
           type="button"
           aria-label={c.closePhoto}
           className="flex size-11 shrink-0 items-center justify-center text-fg"

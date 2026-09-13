@@ -1,6 +1,7 @@
 import { ArrowUpRight, FileText } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { CopyRow } from "@/components/copy-row";
+import { NewWindow } from "@/components/new-window";
 import { Button } from "@/components/ui/button";
 import {
   bankPdfs,
@@ -42,6 +43,7 @@ export function JarsSection({ locale }: { locale: Locale }) {
                 <a href={jar.href} target="_blank" rel="noreferrer">
                   {c.openJar}
                   <ArrowUpRight className="size-4" />
+                  <NewWindow locale={locale} />
                 </a>
               </Button>
             </li>
@@ -55,12 +57,22 @@ export function JarsSection({ locale }: { locale: Locale }) {
 export function DonateSection({ locale }: { locale: Locale }) {
   const c = t(locale);
   const [tab, setTab] = useState<Tab>("cards");
+  const tabRefs = useRef<Partial<Record<Tab, HTMLButtonElement | null>>>({});
   const labels: Record<Tab, string> = {
     cards: c.tabCards,
     bank: c.tabBank,
     crypto: c.tabCrypto,
     anon: c.tabAnon,
   };
+
+  function onTabKey(e: KeyboardEvent<HTMLButtonElement>, index: number) {
+    const dir = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+    if (!dir) return;
+    e.preventDefault();
+    const next = tabs[(index + dir + tabs.length) % tabs.length];
+    setTab(next);
+    tabRefs.current[next]?.focus();
+  }
 
   return (
     <section id="donate" className="scroll-mt-20 border-t border-line py-12 sm:py-16">
@@ -72,13 +84,20 @@ export function DonateSection({ locale }: { locale: Locale }) {
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">{c.donateLead}</p>
 
         <div className="mt-8 flex flex-wrap gap-1" role="tablist" aria-label={c.donateTitle}>
-          {tabs.map((id) => (
+          {tabs.map((id, index) => (
             <button
               key={id}
               type="button"
               role="tab"
+              id={`donate-tab-${id}`}
+              aria-controls={`donate-panel-${id}`}
               aria-selected={tab === id}
+              tabIndex={tab === id ? 0 : -1}
+              ref={(el) => {
+                tabRefs.current[id] = el;
+              }}
               onClick={() => setTab(id)}
+              onKeyDown={(e) => onTabKey(e, index)}
               className={cn(
                 "min-h-11 rounded-md px-4 text-sm",
                 tab === id ? "bg-cta text-cta-fg" : "text-muted hover:text-fg",
@@ -89,7 +108,12 @@ export function DonateSection({ locale }: { locale: Locale }) {
           ))}
         </div>
 
-        <div className="mt-6" role="tabpanel">
+        <div
+          className="mt-6"
+          role="tabpanel"
+          id={`donate-panel-${tab}`}
+          aria-labelledby={`donate-tab-${tab}`}
+        >
           {tab === "cards" ? (
             <div className="grid gap-2 sm:grid-cols-2">
               {cards.map((row) => (
@@ -112,6 +136,7 @@ export function DonateSection({ locale }: { locale: Locale }) {
                     <a href={asset(pdf.href)} target="_blank" rel="noreferrer">
                       <FileText className="size-4" />
                       {c.downloadPdf} {pdf.code}
+                      <NewWindow locale={locale} />
                     </a>
                   </Button>
                 ))}

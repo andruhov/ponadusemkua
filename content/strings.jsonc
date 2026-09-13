@@ -55,10 +55,11 @@
     "en": "Photo reports from our deliveries. Each caption opens the matching Telegram post."
   },
   "emptyGallery": {
-    "uk": "Покладіть фотографії у папку public/work — і тут з’явиться сітка.",
-    "en": "Add photographs to the public/work folder and they will appear here."
+    "uk": "Фотозвіти з’являться тут найближчим часом.",
+    "en": "Photo reports will appear here soon."
   },
   "seeMore": { "uk": "Дивитися більше", "en": "See more" },
+  "openPhoto": { "uk": "Відкрити фото", "en": "Open photo" },
 
   // Соцмережі (підвал). Самі посилання — у socials.jsonc.
   "socialTitle": { "uk": "Соцмережі", "en": "Social" },
@@ -117,6 +118,19 @@
   "closePhoto": { "uk": "Закрити фото", "en": "Close photo" },
   "copy": { "uk": "Копіювати", "en": "Copy" },
   "copied": { "uk": "Скопійовано", "en": "Copied" },
+  "copyFailed": {
+    "uk": "Не вдалося скопіювати. Скопіюйте вручну.",
+    "en": "Could not copy. Please copy it manually."
+  },
+  "newTab": {
+    "uk": " (відкривається у новій вкладці)",
+    "en": " (opens in a new tab)"
+  },
+  "errorTitle": { "uk": "Щось пішло не так", "en": "Something went wrong" },
+  "errorLead": {
+    "uk": "Оновіть сторінку або поверніться на головну.",
+    "en": "Reload the page or go back to the home page."
+  },
   "langUk": { "uk": "UKR", "en": "UKR" },
   "langEn": { "uk": "ENG", "en": "ENG" },
   "skip": { "uk": "До змісту", "en": "Skip to content" },

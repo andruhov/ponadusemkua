@@ -1,3 +1,4 @@
+import { NewWindow } from "@/components/new-window";
 import { socials, t, type Locale } from "@/lib/content";
 import { SocialIcon } from "@/components/social-icon";
 
@@ -20,6 +21,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               >
                 <SocialIcon id={s.id} />
                 {s.label}
+                <NewWindow locale={locale} />
               </a>
             </li>
           ))}

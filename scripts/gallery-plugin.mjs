@@ -89,16 +89,18 @@ export function writeGalleryManifest(root) {
 }
 
 export function galleryPlugin() {
+  let rootDir = process.cwd();
   return {
     name: "gallery-folder",
     configResolved(config) {
-      writeGalleryManifest(config.root);
+      rootDir = config.root;
+      writeGalleryManifest(rootDir);
     },
     configureServer(server) {
-      const slideshowDir = path.join(server.config.root, "public/slideshow");
-      const workDir = path.join(server.config.root, "public/work");
-      const captionsFile = path.join(server.config.root, "content/gallery-captions.txt");
-      const contentDir = path.join(server.config.root, "content");
+      const slideshowDir = path.join(rootDir, "public/slideshow");
+      const workDir = path.join(rootDir, "public/work");
+      const captionsFile = path.join(rootDir, "content/gallery-captions.txt");
+      const contentDir = path.join(rootDir, "content");
       fs.mkdirSync(slideshowDir, { recursive: true });
       fs.mkdirSync(workDir, { recursive: true });
       server.watcher.add(slideshowDir);
@@ -109,7 +111,7 @@ export function galleryPlugin() {
         const inWork = !path.relative(workDir, file).startsWith("..");
         const isCaptions = path.resolve(file) === path.resolve(captionsFile);
         if (!inSlide && !inWork && !isCaptions) return;
-        writeGalleryManifest(server.config.root);
+        writeGalleryManifest(rootDir);
         server.ws.send({ type: "full-reload" });
       };
       server.watcher.on("add", onFs);
@@ -117,7 +119,7 @@ export function galleryPlugin() {
       server.watcher.on("change", onFs);
     },
     buildStart() {
-      writeGalleryManifest(process.cwd());
+      writeGalleryManifest(rootDir);
     },
   };
 }

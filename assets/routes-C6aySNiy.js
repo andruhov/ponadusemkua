@@ -1,0 +1,1 @@
+import{t as e}from"./home-page-smD_BYUv.js";import{y as t}from"./index-D_LGoUS6.js";var n=t();function r(){return(0,n.jsx)(e,{locale:`uk`})}export{r as component};

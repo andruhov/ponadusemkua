@@ -1,5 +1,23 @@
 <!doctype html>
-<meta charset="utf-8" />
-<title>Mykolaiv First</title>
-<meta http-equiv="refresh" content="0;url=/en" />
-<link rel="canonical" href="/en" />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mykolaiv First</title>
+    <script>
+      (function () {
+        var path = location.pathname.replace(/\/eng(?:\.html)?\/?$/, "/en");
+        if (path === location.pathname) {
+          path = location.pathname.replace(/\/[^/]*$/, "/") + "en";
+        }
+        location.replace(path + location.search + location.hash);
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=en" />
+    </noscript>
+    <link rel="canonical" href="en" />
+  </head>
+  <body>
+    <p><a href="en">Continue to the English page</a></p>
+  </body>
+</html>

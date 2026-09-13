@@ -1,29 +1,34 @@
 import type { ErrorComponentProps } from "@tanstack/react-router";
 import { TriangleAlert } from "lucide-react";
+import { t, type Locale } from "@/lib/content";
+import { localeFromPath } from "@/lib/locale";
+import { asset } from "@/lib/utils";
 
-const FALLBACK_MESSAGE = "An unexpected error occurred. Try reloading the page.";
+function localeNow(): Locale {
+  if (typeof window === "undefined") return "uk";
+  return localeFromPath(window.location.pathname);
+}
 
-function errorMessage(error: unknown): string {
+function errorMessage(error: unknown, fallback: string): string {
   if (error instanceof Error && error.message) return error.message;
   if (typeof error === "string" && error) return error;
-  return FALLBACK_MESSAGE;
+  return fallback;
 }
 
 export function AppErrorComponent({ error }: ErrorComponentProps) {
+  const c = t(localeNow());
+  const home = localeNow() === "en" ? asset("/en") : asset("/");
   return (
-    <main
-      className={
-        "flex min-h-screen flex-col items-center justify-center gap-3 px-6 text-center " +
-        "bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50"
-      }
-    >
-      <span className="text-red-500" aria-hidden="true">
+    <main className="flex min-h-dvh flex-col items-center justify-center gap-3 bg-bg px-6 text-center text-fg">
+      <span className="text-accent" aria-hidden="true">
         <TriangleAlert className="size-10" strokeWidth={2} />
       </span>
-      <h1 className="text-lg font-semibold">Something went wrong</h1>
-      <p className="max-w-md text-sm break-words text-zinc-500 dark:text-zinc-400">
-        {errorMessage(error)}
-      </p>
+      <h1 className="font-display text-lg font-semibold">{c.errorTitle}</h1>
+      <p className="max-w-md text-sm text-muted">{c.errorLead}</p>
+      <p className="max-w-md text-sm break-words text-subtle">{errorMessage(error, c.errorLead)}</p>
+      <a href={home} className="mt-4 text-sm text-fg underline decoration-line underline-offset-4 hover:text-accent">
+        {c.short}
+      </a>
     </main>
   );
 }

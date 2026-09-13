@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { DonateSection, JarsSection } from "@/components/donate-section";
 import { GallerySection } from "@/components/gallery-section";
 import { HeroSlideshow } from "@/components/hero-slideshow";
@@ -10,10 +9,6 @@ import { t, type Locale } from "@/lib/content";
 
 export function HomePage({ locale }: { locale: Locale }) {
   const c = t(locale);
-
-  useEffect(() => {
-    document.documentElement.lang = locale === "en" ? "en" : "uk";
-  }, [locale]);
 
   return (
     <div className="min-h-dvh bg-bg text-fg">

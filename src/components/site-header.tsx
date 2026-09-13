@@ -1,6 +1,6 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { t, type Locale } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -12,10 +12,14 @@ const links = [
   { href: "#donate", key: "navDonate" },
 ] as const;
 
+const MENU_ID = "site-mobile-menu";
+
 export function SiteHeader({ locale }: { locale: Locale }) {
   const c = t(locale);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -29,6 +33,19 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    firstLinkRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (
@@ -75,9 +92,11 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         <div className="flex items-center gap-1 lg:hidden">
           <LangSwitch locale={locale} />
           <button
+            ref={menuButtonRef}
             type="button"
             className="flex size-11 items-center justify-center text-fg"
             aria-expanded={open}
+            aria-controls={MENU_ID}
             aria-label={open ? c.close : c.menu}
             onClick={() => setOpen((v) => !v)}
           >
@@ -87,11 +106,12 @@ export function SiteHeader({ locale }: { locale: Locale }) {
       </div>
 
       {open ? (
-        <div className="border-t border-line bg-bg lg:hidden">
+        <div id={MENU_ID} className="border-t border-line bg-bg lg:hidden">
           <nav className="mx-auto flex max-w-6xl flex-col px-4 py-4" aria-label={c.menu}>
-            {links.map((l) => (
+            {links.map((l, i) => (
               <a
                 key={l.href}
+                ref={i === 0 ? firstLinkRef : undefined}
                 href={l.href}
                 className="flex min-h-11 items-center text-base text-fg"
                 onClick={() => setOpen(false)}
@@ -113,19 +133,21 @@ export function SiteHeader({ locale }: { locale: Locale }) {
 
 function LangSwitch({ locale }: { locale: Locale }) {
   const c = t(locale);
+  const location = useLocation();
+  const hash = location.hash.replace(/^#/, "") || undefined;
   return (
     <div className="flex items-center gap-1 rounded-md border border-line px-1 py-1 text-xs font-medium">
       {locale === "uk" ? (
         <span className="rounded-sm bg-surface-2 px-2 py-1 text-fg">{c.langUk}</span>
       ) : (
-        <Link to="/" className="px-2 py-1 text-muted hover:text-fg">
+        <Link to="/" hash={hash} className="px-2 py-1 text-muted hover:text-fg">
           {c.langUk}
         </Link>
       )}
       {locale === "en" ? (
         <span className="rounded-sm bg-surface-2 px-2 py-1 text-fg">{c.langEn}</span>
       ) : (
-        <Link to="/en" className="px-2 py-1 text-muted hover:text-fg">
+        <Link to="/en" hash={hash} className="px-2 py-1 text-muted hover:text-fg">
           {c.langEn}
         </Link>
       )}

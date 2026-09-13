@@ -1,0 +1,1 @@
+import{h as e,y as t}from"./index-D_LGoUS6.js";var n=t(),r=()=>(0,n.jsx)(e,{to:`/en`,replace:!0});export{r as component};

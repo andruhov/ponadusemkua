@@ -2,7 +2,7 @@
 
 Сайт ГО «Миколаїв понад усе» / NGO “Mykolaiv First”: хто ми, фотозвіти, банки Monobank, реквізити.
 
-Жива сторінка: https://andruhov.github.io/ponadusemkua/
+Жива тестова сторінка: https://andruhov.github.io/ponadusemkua/
 
 ## Що правити без коду
 
@@ -38,4 +38,4 @@ npm run build
 
 Джерело фото завжди `public/`. Кореневі `work/`, `slideshow/`, `pdf/` — копії для Pages, їх оновлює збірка.
 
-Є також workflow `.github/workflows/pages.yml`, якщо колись перемкнете Pages на GitHub Actions. Поки Source = гілка / root, живий сайт залежить від HTML у корені.
+Workflow `.github/workflows/pages.yml` лише перевіряє `npm test`, typecheck і збірку. Живий сайт іде з кореня гілки `main`, не з GitHub Actions.

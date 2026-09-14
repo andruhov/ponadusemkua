@@ -20,9 +20,9 @@
  * `process.env`, which is why the merge has to happen before Vite starts.
  */
 import { spawn } from "node:child_process";
-import { readFileSync, realpathSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { constants as osConstants } from "node:os";
-import { dirname, join } from "node:path";
+import { dirname, delimiter, isAbsolute, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const APP_ENV_REL_PATH = ".grok/app-env.json";
@@ -88,6 +88,20 @@ export function projectRoot() {
 }
 
 /**
+ * Prefer `<root>/node_modules/.bin/<cmd>` so `npm run build` works when PATH
+ * does not include the local bin dir (GitHub Actions `spawn("vite")` ENOENT).
+ * Absolute paths (`process.execPath` in tests) are left alone.
+ */
+export function resolveCommand(command, root = projectRoot()) {
+  if (!command || isAbsolute(command) || command.includes("/") || command.includes("\\")) {
+    return command;
+  }
+  const binName = process.platform === "win32" ? `${command}.cmd` : command;
+  const local = join(root, "node_modules", ".bin", binName);
+  return existsSync(local) ? local : command;
+}
+
+/**
  * Whether `moduleUrl` is the script node was asked to run.
  *
  * Both sides are resolved through symlinks: node realpaths `import.meta.url`
@@ -110,8 +124,11 @@ function main(argv) {
     console.error("usage: node scripts/with-app-env.mjs <command> [args…]");
     process.exit(2);
   }
-  const env = mergeAppEnv(readAppEnv(projectRoot()), process.env);
-  const child = spawn(command, args, {
+  const root = projectRoot();
+  const env = mergeAppEnv(readAppEnv(root), process.env);
+  const binDir = join(root, "node_modules", ".bin");
+  env.PATH = `${binDir}${delimiter}${env.PATH || ""}`;
+  const child = spawn(resolveCommand(command, root), args, {
     stdio: "inherit",
     env,
     shell: process.platform === "win32",

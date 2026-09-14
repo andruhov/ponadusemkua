@@ -10,6 +10,7 @@
 # - url_uk / url_en — посилання на допис у Telegram (можна лишити порожнім).
 # - Якщо url_en порожній, для англійської сторінки візьметься url_uk.
 # - Порядок фото на сайті = алфавіт імені файлу (зручно: 01-…, 02-…).
+# - Сітка показує перші 18 файлів; решта лишається в public/work/.
 
 01-printer-cartridges.jpg | Картриджі для військових | Printer cartridges for the military | https://t.me/PonaduseMkUa/5221 |
 02-printer-cartridges-2.jpg | Картриджі для військових | Printer cartridges for the military | https://t.me/PonaduseMkUa/5221 |

@@ -5,6 +5,9 @@ export {
   type WorkFile,
 } from "./gallery.gen";
 
+/** Photos shown in «Наша робота». Extra files stay in `public/work/`. */
+export const WORK_GALLERY_LIMIT = 18;
+
 export function captionFor(
   image: { captionUk: string; captionEn: string },
   locale: "uk" | "en",

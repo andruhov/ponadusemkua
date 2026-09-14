@@ -1,7 +1,7 @@
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { NewWindow } from "@/components/new-window";
-import { captionFor, urlFor, workImages, type WorkFile } from "@/lib/gallery";
+import { captionFor, urlFor, WORK_GALLERY_LIMIT, workImages, type WorkFile } from "@/lib/gallery";
 import { telegramHref, t, type Locale } from "@/lib/content";
 import { asset, cn } from "@/lib/utils";
 
@@ -10,7 +10,7 @@ const FOCUSABLE =
 
 export function GallerySection({ locale }: { locale: Locale }) {
   const c = t(locale);
-  const images = workImages;
+  const images = workImages.slice(0, WORK_GALLERY_LIMIT);
   const [open, setOpen] = useState<number | null>(null);
 
   useEffect(() => {

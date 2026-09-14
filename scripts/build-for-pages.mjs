@@ -82,7 +82,7 @@ if (invoked) {
   discardStash();
   try {
     const { src } = exportPages(ROOT);
-    console.log(`pages-export: ${src} -> docs/index.html + repo root`);
+    console.log(`pages-export: ${src} -> docs/index.html`);
   } catch (err) {
     console.error(err instanceof Error ? err.message : err);
     process.exit(1);

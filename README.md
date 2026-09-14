@@ -34,8 +34,8 @@ npm run build
 
 ## GitHub Pages
 
-Сайт зараз віддається **з кореня гілки** (`index.html` у корені репозиторію). `npm run build` кладе готові сторінки і в корінь, і в `docs/` (гілка `docs/` у git не тримається).
+Живий сайт: https://andruhov.github.io/ponadusemkua/
 
-Джерело фото завжди `public/`. Кореневі `work/`, `slideshow/`, `pdf/` — копії для Pages, їх оновлює збірка.
+Джерело в Settings — **GitHub Actions**. Кожен пуш у `main` проганяє тести, збирає сайт у `docs/` і викладає його workflow `.github/workflows/pages.yml`. Каталог `docs/` у git не тримається.
 
-Workflow `.github/workflows/pages.yml` лише перевіряє `npm test`, typecheck і збірку. Живий сайт іде з кореня гілки `main`, не з GitHub Actions.
+Джерело фото, PDF і іконок — `public/`. Після змін зробіть пуш у `main`; комітити зібраний HTML не потрібно. Якщо збірка в Actions червона, попередня версія сайту лишається живою.

@@ -102,6 +102,22 @@ export function resolveCommand(command, root = projectRoot()) {
 }
 
 /**
+ * Run `vite` as `node node_modules/vite/bin/vite.js` so Windows does not go
+ * through `vite.cmd` (`shell: true` + `"node"` is ENOENT when PATH is odd).
+ */
+export function planSpawn(command, args, root = projectRoot()) {
+  const viteJs = join(root, "node_modules", "vite", "bin", "vite.js");
+  if (command === "vite" && existsSync(viteJs)) {
+    return { command: process.execPath, args: [viteJs, ...args], shell: false };
+  }
+  return {
+    command: resolveCommand(command, root),
+    args,
+    shell: process.platform === "win32",
+  };
+}
+
+/**
  * Whether `moduleUrl` is the script node was asked to run.
  *
  * Both sides are resolved through symlinks: node realpaths `import.meta.url`
@@ -127,11 +143,12 @@ function main(argv) {
   const root = projectRoot();
   const env = mergeAppEnv(readAppEnv(root), process.env);
   const binDir = join(root, "node_modules", ".bin");
-  env.PATH = `${binDir}${delimiter}${env.PATH || ""}`;
-  const child = spawn(resolveCommand(command, root), args, {
+  env.PATH = `${binDir}${delimiter}${dirname(process.execPath)}${delimiter}${env.PATH || ""}`;
+  const planned = planSpawn(command, args, root);
+  const child = spawn(planned.command, planned.args, {
     stdio: "inherit",
     env,
-    shell: process.platform === "win32",
+    shell: planned.shell,
   });
   // The dev server is long-running and is stopped by signalling this wrapper.
   for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"]) {

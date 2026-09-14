@@ -3,7 +3,7 @@ import { mkdirSync, mkdtempSync, readFileSync, writeFileSync, existsSync } from 
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { flattenNestedBase, publishToRepoRoot, writeSpaFallback } from "./pages-export.mjs";
+import { exportPages, flattenNestedBase, publishToRepoRoot, writeSpaFallback } from "./pages-export.mjs";
 
 test("flattenNestedBase promotes nested index when dest has none", () => {
   const dest = mkdtempSync(join(tmpdir(), "pages-flat-"));
@@ -46,4 +46,19 @@ test("publishToRepoRoot copies the Pages tree onto the repo root", () => {
   assert.equal(readFileSync(join(root, "index.html"), "utf8"), "home");
   assert.equal(readFileSync(join(root, "en", "index.html"), "utf8"), "en-home");
   assert.equal(readFileSync(join(root, "assets", "app.js"), "utf8"), "js");
+});
+
+test("exportPages writes docs/ only, not the repo root", () => {
+  const root = mkdtempSync(join(tmpdir(), "pages-export-"));
+  const src = join(root, "dist");
+  mkdirSync(join(src, "en"), { recursive: true });
+  writeFileSync(join(src, "index.html"), "home");
+  writeFileSync(join(src, "en", "index.html"), "Who we are — Mykolaiv First");
+  const { dest } = exportPages(root);
+  assert.equal(dest, join(root, "docs"));
+  assert.equal(readFileSync(join(dest, "index.html"), "utf8"), "home");
+  assert.equal(readFileSync(join(dest, "404.html"), "utf8"), "home");
+  assert.equal(existsSync(join(dest, ".nojekyll")), true);
+  assert.equal(existsSync(join(root, "index.html")), false);
+  assert.equal(existsSync(join(root, "en")), false);
 });

@@ -59,7 +59,7 @@ export function assertEnglishPrerender(dest) {
 const ROOT_FILES = [".nojekyll", "404.html", "eng.html", "favicon.svg", "index.html", "og.jpg"];
 const ROOT_DIRS = ["__grok", "assets", "en", "eng", "pdf", "slideshow", "work"];
 
-/** GitHub Pages is served from the repo root, so the built tree must live there too. */
+/** Copy the Pages tree onto the repo root. Unused while Pages is deployed from Actions. */
 export function publishToRepoRoot(root, dest) {
   for (const name of ROOT_FILES) {
     const from = path.join(dest, name);
@@ -92,7 +92,6 @@ export function exportPages(root = process.cwd()) {
     throw new Error(`pages-export: still no index.html in ${dest}`);
   }
   assertEnglishPrerender(dest);
-  publishToRepoRoot(root, dest);
   return { src, dest };
 }
 
@@ -101,7 +100,7 @@ const invoked =
 if (invoked) {
   try {
     const { src } = exportPages();
-    console.log(`pages-export: ${src} -> docs/index.html + repo root`);
+    console.log(`pages-export: ${src} -> docs/index.html`);
   } catch (err) {
     console.error(err instanceof Error ? err.message : err);
     process.exit(1);

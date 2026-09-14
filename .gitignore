@@ -19,3 +19,4 @@ tmp
 .grok/*.jpg
 .grok/*.py
 .grok/og-pending
+.pages-stash/

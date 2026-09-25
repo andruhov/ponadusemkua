@@ -21,15 +21,10 @@ docs/
 /work/
 /slideshow/
 /pdf/
-/__grok/
 *.log
 .DS_Store
 screenshots
 artifacts
 tmp
 .cache
-.grok/*.png
-.grok/*.jpg
-.grok/*.py
-.grok/og-pending
 .pages-stash/

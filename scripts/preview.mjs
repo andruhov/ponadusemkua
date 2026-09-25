@@ -5,7 +5,7 @@
  * `vite preview` is strictPort, so a preview left over from an earlier turn
  * both fails the next start and keeps serving the previous build's output.
  * Every restart therefore kills the current port owner first, whoever started
- * it. Owners come from /proc, so this runs only inside the Linux sandbox.
+ * it. Owners come from /proc, so this runs only on Linux.
  *
  *   node scripts/preview.mjs stop|restart
  */
@@ -27,8 +27,8 @@ const PREVIEW_PORT = 8081;
 const PREVIEW_URL = `http://127.0.0.1:${PREVIEW_PORT}/`;
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const PID_FILE = join(ROOT, ".grok/preview.pid");
-const LOG_FILE = join(ROOT, ".grok/preview.log");
+const PID_FILE = join(ROOT, "tmp/preview.pid");
+const LOG_FILE = join(ROOT, "tmp/preview.log");
 const READY_TIMEOUT_MS = Number(process.env.PREVIEW_READY_TIMEOUT_MS || 60000);
 const GRACE_MS = 3000;
 const POLL_MS = 100;
@@ -45,7 +45,7 @@ export function parsePreviewArgs(argv) {
 
 export function parsePid(text) {
   const pid = Number.parseInt(String(text ?? "").trim(), 10);
-  // pid 1 is the sandbox init — never the preview, and dangerous to signal.
+  // pid 1 is init — never the preview, and dangerous to signal.
   return Number.isInteger(pid) && pid > 1 ? pid : null;
 }
 
@@ -80,8 +80,7 @@ export function looksLikePreviewProcess(cmdline) {
     .split("\0")
     .filter(Boolean)
     .join(" ");
-  // The sandbox service runs scripts/preview-thumbnail.mjs in this box, and
-  // this script can be running concurrently: neither is ever a target.
+  // scripts/preview-thumbnail.mjs can be running concurrently: it is never a target.
   if (/\bpreview[\w-]*\.mjs\b/.test(argv)) return false;
   // The `npm run preview` wrapper (`npm-cli.js run preview`) and its vite child.
   // `preview` must be the whole script name: `run preview:stop`/`preview:restart`
@@ -336,7 +335,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     process.exit(1);
   }
   if (!existsSync("/proc/self")) {
-    console.error("[preview] no /proc — this script only runs inside the sandbox");
+    console.error("[preview] no /proc — this script only runs on Linux");
     process.exit(1);
   }
   process.exitCode = args.action === "stop" ? ((await stop()) ? 0 : 1) : await restart();

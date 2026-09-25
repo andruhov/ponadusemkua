@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { mkdirSync, readFileSync, realpathSync, statSync, writeFileSync } from "node:fs";
-import { dirname } from "node:path";
+import { dirname, isAbsolute, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 import { checkedOutputPath, checkedUrl } from "./browser-guard.mjs";
 import { computeBrandWarnings } from "./brand-check.mjs";
@@ -26,11 +27,14 @@ if (args.error) {
   process.exit(1);
 }
 
+const PROJECT_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const resolveUnderRoot = (p) => (isAbsolute(p) ? p : join(PROJECT_ROOT, p));
+
 const url = checkedUrl(args.url);
-const outPng = checkedOutputPath(args.outPng, ["/workspace"]);
+const outPng = checkedOutputPath(resolveUnderRoot(args.outPng), [PROJECT_ROOT]);
 const derived = derivedPaths(outPng);
-const mobilePng = checkedOutputPath(derived.mobilePng, ["/workspace"]);
-const outJson = checkedOutputPath(derived.verdictJson, ["/workspace"], "verdict JSON");
+const mobilePng = checkedOutputPath(derived.mobilePng, [PROJECT_ROOT]);
+const outJson = checkedOutputPath(derived.verdictJson, [PROJECT_ROOT], "verdict JSON");
 
 const MAX_BASELINE_BYTES = 1024 * 1024;
 const baselineRequested = Boolean(args.baseline);
@@ -38,7 +42,7 @@ let baselinePath = null;
 let baselineResolveError = null;
 if (baselineRequested) {
   try {
-    baselinePath = checkedOutputPath(realpathSync(args.baseline), ["/workspace"], "baseline");
+    baselinePath = checkedOutputPath(realpathSync(resolveUnderRoot(args.baseline)), [PROJECT_ROOT], "baseline");
   } catch (err) {
     baselineResolveError = err?.code ?? "unresolvable path";
   }
@@ -49,7 +53,7 @@ if (baselineRequested) {
           ok: false,
           error:
             `--baseline ${args.baseline} is this run's own verdict output; ` +
-            "pass a distinct output PNG (e.g. app-builder-built.png) so the baseline is not overwritten",
+            "pass a distinct output PNG (e.g. preview-built.png) so the baseline is not overwritten",
         },
         null,
         2,

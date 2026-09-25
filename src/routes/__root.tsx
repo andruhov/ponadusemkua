@@ -1,6 +1,4 @@
 import { createRootRoute, HeadContent, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
-import { AuthProvider } from "@/lib/auth/provider";
-import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { Toaster } from "sonner";
 import { localeFromPath } from "@/lib/locale";
 import { asset } from "@/lib/utils";
@@ -16,8 +14,6 @@ export const Route = createRootRoute({
     links: [
       { rel: "icon", type: "image/svg+xml", href: asset("favicon.svg") },
       { rel: "stylesheet", href: appCss },
-      { rel: "manifest", href: asset("/__grok/manifest.webmanifest") },
-      { rel: "apple-touch-icon", href: asset("/__grok/icon-180.png") },
     ],
   }),
   component: RootDocument,
@@ -33,10 +29,7 @@ function RootDocument() {
         <HeadContent />
       </head>
       <body className="antialiased">
-        <PreviewHostBridge />
-        <AuthProvider>
-          <Outlet />
-        </AuthProvider>
+        <Outlet />
         <Toaster
           theme="dark"
           position="bottom-center"

@@ -30,7 +30,7 @@ test("parsePid reads a pidfile and rejects junk", () => {
   assert.equal(parsePid(""), null);
   assert.equal(parsePid("not-a-pid"), null);
   assert.equal(parsePid("-7"), null);
-  // pid 1 is the sandbox init, never a preview server.
+  // pid 1 is init, never a preview server.
   assert.equal(parsePid("1"), null);
 });
 
@@ -99,7 +99,7 @@ test("looksLikePreviewProcess matches the npm wrapper and its vite child", () =>
 });
 
 test("looksLikePreviewProcess spares the sibling scripts and re-used pids", () => {
-  // The sandbox service runs this one in the same box (CapturePreviewThumbnail).
+  // A sibling capture script is never the preview server.
   const thumbnail = cmdline(
     "node",
     "/opt/app-template/scripts/preview-thumbnail.mjs",

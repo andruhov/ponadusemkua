@@ -17,5 +17,5 @@
     },
     "allowImportingTsExtensions": true
   },
-  "include": ["src", "server", "scripts/parse-jsonc.d.mts"]
+  "include": ["src", "scripts/parse-jsonc.d.mts"]
 }

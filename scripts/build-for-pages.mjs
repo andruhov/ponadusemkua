@@ -19,7 +19,6 @@ export const PUBLISHED_NAMES = [
   "favicon.svg",
   "index.html",
   "og.jpg",
-  "__grok",
   "assets",
   "en",
   "eng",

@@ -1,16 +1,14 @@
 #!/usr/bin/env node
 /**
- * Hand a staged file over to a path another agent reads, in one step.
+ * Hand a staged file over to a path another process reads, in one step.
  *
- *   node scripts/write-atomic.mjs /workspace/.grok/og.jpg.tmp public/og.jpg
+ *   node scripts/write-atomic.mjs tmp/og.jpg.tmp public/og.jpg
  *
- * The brand-asset task writes public/og.jpg and src/lib/og/site.json while the
- * parent may be mid-`npm run build`, so an in-place write can be read
- * half-finished. rename(2) is atomic within one filesystem: a reader sees the
- * old bytes or the new ones. /workspace is one filesystem, so a staged file
- * from anywhere else (/tmp is a separate mount) is refused rather than copied:
- * copying would have to land its temp in the target's directory, which is the
- * one thing a staged path is not allowed to do.
+ * An in-place write can be read half-finished during `npm run build`. rename(2)
+ * is atomic within one filesystem: a reader sees the old bytes or the new ones.
+ * A staged file on another filesystem is refused rather than copied: copying
+ * would have to land its temp in the target's directory, which is the one
+ * place a staged path is not allowed to be (`public/` ships verbatim).
  */
 import { existsSync, mkdirSync, renameSync } from "node:fs";
 import { dirname, isAbsolute, join, relative, resolve } from "node:path";
@@ -47,8 +45,7 @@ export function stagingError({ staged, target, publicDir }) {
 
 /**
  * Moves `staged` onto `target`, leaving `target` untouched if anything fails.
- * `rename` is injectable because EXDEV — the refusal the "stage under
- * /workspace/.grok/" contract rests on — cannot be provoked portably.
+ * `rename` is injectable because EXDEV cannot be provoked portably.
  */
 export function handOver(staged, target, { rename = renameSync } = {}) {
   if (!existsSync(staged)) {
@@ -61,7 +58,7 @@ export function handOver(staged, target, { rename = renameSync } = {}) {
     if (err?.code === "EXDEV") {
       throw new Error(
         `${staged} is on another filesystem than ${target}, so the hand-over cannot be a `
-          + "rename — stage under /workspace/.grok/ instead",
+          + "rename — stage on the same filesystem as the target",
       );
     }
     throw err;
@@ -74,9 +71,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     console.error(`[write-atomic] ${args.error}`);
     process.exit(1);
   }
-  // Relative paths follow this script's root, not the caller's cwd: the brand
-  // pass runs from wherever its sub-shell left it, and the public/ refusal
-  // below is defined against that same root.
+  // Relative paths follow this script's root, not the caller's cwd.
   const staged = resolve(ROOT, args.staged);
   const target = resolve(ROOT, args.target);
   const problem = stagingError({ staged, target, publicDir: join(ROOT, "public") });

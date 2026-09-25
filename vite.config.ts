@@ -4,13 +4,10 @@ import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { nitro } from "nitro/vite";
 // @ts-expect-error JS plugin alongside the TS vite config
-import { grokPwaPlugin } from "./scripts/grok-pwa-plugin.mjs";
-// @ts-expect-error JS plugin alongside the TS vite config
 import { appEnvPlugin } from "./scripts/app-env-plugin.mjs";
 // @ts-expect-error JS plugin alongside the TS vite config
 import { galleryPlugin } from "./scripts/gallery-plugin.mjs";
 
-// `0.0.0.0:8080` is the live-preview contract — don't change host/port.
 export default defineConfig(({ command, isPreview }) => ({
   base: process.env.GITHUB_PAGES_BASE || (process.env.GITHUB_PAGES === "1" ? "/ponadusemkua/" : "/"),
   server: {
@@ -26,7 +23,6 @@ export default defineConfig(({ command, isPreview }) => ({
   resolve: { tsconfigPaths: true },
   plugins: [
     appEnvPlugin(),
-    grokPwaPlugin(),
     galleryPlugin(),
     tailwindcss(),
     tanstackStart({
@@ -40,7 +36,6 @@ export default defineConfig(({ command, isPreview }) => ({
       ? [
           nitro({
             preset: "vercel",
-            serverDir: "./server",
           }),
         ]
       : []),

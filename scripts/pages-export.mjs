@@ -57,7 +57,7 @@ export function assertEnglishPrerender(dest) {
 }
 
 const ROOT_FILES = [".nojekyll", "404.html", "eng.html", "favicon.svg", "index.html", "og.jpg"];
-const ROOT_DIRS = ["__grok", "assets", "en", "eng", "pdf", "slideshow", "work"];
+const ROOT_DIRS = ["assets", "en", "eng", "pdf", "slideshow", "work"];
 
 /** Copy the Pages tree onto the repo root. Unused while Pages is deployed from Actions. */
 export function publishToRepoRoot(root, dest) {

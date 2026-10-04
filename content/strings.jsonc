@@ -109,13 +109,13 @@
     "en": "Tap a row to copy the address."
   },
   "anonLead": {
-    "uk": "Monero — для анонімнихпереказів без публічної історії.",
+    "uk": "Monero — для анонімних переказів без публічної історії.",
     "en": "Monero — for anonymous transfers without a public history."
   },
 
   // Шапка, меню, підписи кнопок інтерфейсу.
   "navAbout": { "uk": "Про нас", "en": "About" },
-  "navWork": { "uk": "Що ми робимо", "en": "Work" },
+  "navWork": { "uk": "Що ми робимо", "en": "Our work" },
   "navJars": { "uk": "Збори", "en": "Fundraisers" },
   "navDonate": { "uk": "Реквізити", "en": "Support us" },
   "menu": { "uk": "Меню", "en": "Menu" },

@@ -116,8 +116,8 @@
   // Шапка, меню, підписи кнопок інтерфейсу.
   "navAbout": { "uk": "Про нас", "en": "About" },
   "navWork": { "uk": "Що ми робимо", "en": "Work" },
-  "navJars": { "uk": "Збори", "en": "Funds" },
-  "navDonate": { "uk": "Реквізити", "en": "Details" },
+  "navJars": { "uk": "Збори", "en": "Fundraisers" },
+  "navDonate": { "uk": "Реквізити", "en": "Support us" },
   "menu": { "uk": "Меню", "en": "Menu" },
   "close": { "uk": "Закрити", "en": "Close" },
   "prev": { "uk": "Попереднє фото", "en": "Previous photo" },

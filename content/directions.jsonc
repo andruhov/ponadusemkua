@@ -4,7 +4,8 @@
 // 1. Скопіюйте один об’єкт { … } і вставте його в список.
 // 2. Придумайте slug латиницею (supplies, camo…). Це адреса сторінки:
 //      /napryamky/ваш-slug     і     /en/napryamky/ваш-slug
-// 3. jar — id банки з donate.jsonc (military, nets, warehouse, fuel, civilians).
+// 3. href — посилання кнопки «Підтримати цей напрямок»
+//    (банка Monobank, Telegram, будь-яка інша адреса).
 // 4. Фото покладіть у public/work/ваш-slug/ (назва теки = slug).
 //    Сайт підхопить усі .jpg/.png/… сам — шляхи тут не пишіть.
 //    Перше фото за алфавітом = обкладинка. Зручно нумерувати: 01-..., 02-...
@@ -15,7 +16,7 @@
 [
   {
     "slug": "supplies",
-    "jar": "military",
+    "href": "https://send.monobank.ua/jar/rnLJ4edAw",
     "title": { "uk": "Продукти для військових", "en": "Food for soldiers" },
     "lead": {
       "uk": "Регулярно передаємо свіжі продукти підрозділам, які стоять на Миколаївському та Херсонському напрямках.",
@@ -38,7 +39,7 @@
   },
   {
     "slug": "tires",
-    "jar": "military",
+    "href": "https://send.monobank.ua/jar/rnLJ4edAw",
     "title": { "uk": "Шини для військових", "en": "Tires for soldiers" },
     "lead": {
       "uk": "Купуємо й передаємо шини для автівок на передовій — без них евакуація і логістика стають небезпечними.",
@@ -61,7 +62,7 @@
   },
   {
     "slug": "camo",
-    "jar": "nets",
+    "href": "https://send.monobank.ua/jar/4uqZoMUH2g",
     "title": { "uk": "Маскувальні сітки", "en": "Camouflage nets" },
     "lead": {
       "uk": "Наші волонтерки плетуть сітки для техніки і позицій. Збір закриває основи, тканину і все, без чого верстат стоїть.",
@@ -84,7 +85,7 @@
   },
   {
     "slug": "elderly",
-    "jar": "civilians",
+    "href": "https://send.monobank.ua/jar/29Z7ZfHdMe",
     "title": { "uk": "Допомога літнім людям", "en": "Help for older people" },
     "lead": {
       "uk": "Возимо продукти, гігієну й ліки пенсіонерам у Миколаєві та селах області, з яких майже ніхто не виїхав.",
@@ -107,7 +108,7 @@
   },
   {
     "slug": "children",
-    "jar": "civilians",
+    "href": "https://send.monobank.ua/jar/29Z7ZfHdMe",
     "title": { "uk": "Організація свят для дітей", "en": "Holidays for children" },
     "lead": {
       "uk": "Щороку влаштовуємо свята для дітей Миколаєва і сіл області — обережно, без гучних анонсів, зате з костюмами й подарунками.",
@@ -130,7 +131,7 @@
   },
   {
     "slug": "winter",
-    "jar": "civilians",
+    "href": "https://send.monobank.ua/jar/29Z7ZfHdMe",
     "title": { "uk": "Підготовка до важкої зими", "en": "Preparing for a hard winter" },
     "lead": {
       "uk": "Ковдри, бушлати, окопні свічки, грілки, зимова гума — усе, без чого позиції і оселі не переживуть морози й відключення.",

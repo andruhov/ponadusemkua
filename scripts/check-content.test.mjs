@@ -57,13 +57,12 @@ test("content jsonc files match the schema", () => {
     .min(1)
     .parse(socials);
 
-  const jarIds = new Set(donate.jars.map((j) => j.id));
   const directions = parseJsonc(readFileSync(join(root, "content/directions.jsonc"), "utf8"));
   const parsed = z
     .array(
       z.object({
         slug: z.string().regex(/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/),
-        jar: z.string().min(1),
+        href: z.string().url(),
         title: Text,
         lead: Text,
         body: z.array(Text).min(1),
@@ -75,7 +74,6 @@ test("content jsonc files match the schema", () => {
   const workRoot = join(root, "public", "work");
   const slugs = new Set();
   for (const row of parsed) {
-    assert.ok(jarIds.has(row.jar), `direction "${row.slug}" jar "${row.jar}" is not in donate.jsonc`);
     assert.equal(slugs.has(row.slug), false, `duplicate direction slug ${row.slug}`);
     slugs.add(row.slug);
     const dir = join(workRoot, row.slug);

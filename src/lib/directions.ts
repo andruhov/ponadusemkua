@@ -1,11 +1,11 @@
 import { parseJsonc } from "../../scripts/parse-jsonc.mjs";
 import directionsRaw from "../../content/directions.jsonc?raw";
-import { jars, type Jar, type Text } from "@/lib/content";
+import { type Text } from "@/lib/content";
 import { directionImages } from "./gallery.gen";
 
 export type Direction = {
   slug: string;
-  jar: string;
+  href: string;
   title: Text;
   lead: Text;
   body: Text[];
@@ -27,6 +27,15 @@ function isText(v: unknown): v is Text {
   );
 }
 
+function isHttpUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 function parseDirections(raw: string): Direction[] {
   const data = parseJsonc<unknown>(raw);
   if (!Array.isArray(data) || data.length === 0) fail("expected a non-empty list");
@@ -39,9 +48,8 @@ function parseDirections(raw: string): Direction[] {
     }
     if (seen.has(row.slug)) fail(`duplicate slug "${row.slug}"`);
     seen.add(row.slug);
-    if (typeof row.jar !== "string" || !row.jar) fail(`[${i}].jar`);
-    if (!jars.some((j) => j.id === row.jar)) {
-      fail(`[${i}].jar "${row.jar}" is not an id in donate.jsonc`);
+    if (typeof row.href !== "string" || !isHttpUrl(row.href)) {
+      fail(`[${i}].href must be a full http(s) URL`);
     }
     if (!isText(row.title) || !isText(row.lead)) fail(`[${i}] title/lead`);
     if (!Array.isArray(row.body) || row.body.length === 0 || !row.body.every(isText)) {
@@ -53,7 +61,7 @@ function parseDirections(raw: string): Direction[] {
     }
     return {
       slug: row.slug,
-      jar: row.jar,
+      href: row.href,
       title: row.title,
       lead: row.lead,
       body: row.body,
@@ -66,10 +74,6 @@ export const directions = parseDirections(directionsRaw);
 
 export function directionBySlug(slug: string) {
   return directions.find((d) => d.slug === slug);
-}
-
-export function jarForDirection(direction: Direction): Jar | undefined {
-  return jars.find((j) => j.id === direction.jar);
 }
 
 export const directionSlugs = directions.map((d) => d.slug);

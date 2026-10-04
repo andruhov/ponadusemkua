@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { t, type Locale } from "@/lib/content";
-import { directions, jarForDirection, type Direction } from "@/lib/directions";
+import { directions, type Direction } from "@/lib/directions";
 import { homePath } from "@/lib/paths";
 import { cn, mediaAsset } from "@/lib/utils";
 
@@ -16,7 +16,6 @@ const FOCUSABLE =
 
 export function DirectionPage({ locale, direction }: { locale: Locale; direction: Direction }) {
   const c = t(locale);
-  const jar = jarForDirection(direction);
   const home = homePath(locale);
   const others = directions.filter((d) => d.slug !== direction.slug);
   const [open, setOpen] = useState<number | null>(null);
@@ -80,18 +79,15 @@ export function DirectionPage({ locale, direction }: { locale: Locale; direction
             ))}
           </div>
 
-          {jar ? (
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                <a href={jar.href} target="_blank" rel="noreferrer">
-                  {c.supportDirection}
-                  <ArrowUpRight className="size-4" />
-                  <NewWindow locale={locale} />
-                </a>
-              </Button>
-              <p className="self-center text-sm text-muted">{jar.title[locale]}</p>
-            </div>
-          ) : null}
+          <div className="mt-10">
+            <Button asChild size="lg">
+              <a href={direction.href} target="_blank" rel="noreferrer">
+                {c.supportDirection}
+                <ArrowUpRight className="size-4" />
+                <NewWindow locale={locale} />
+              </a>
+            </Button>
+          </div>
 
           {images.length > 1 ? (
             <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2">

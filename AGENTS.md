@@ -29,7 +29,7 @@ Vite 8, React 19, TanStack Start/Router, Tailwind v4. Статичний деп�
 | Слайди першого екрана | `public/slideshow/` |
 | PDF рахунків | `public/pdf/` |
 
-Новий напрямок = новий об’єкт у `content/directions.jsonc` (slug, jar з `donate.jsonc`, тексти) і тека `public/work/<slug>/` з фото. Шляхи до знімків у jsonc не пишуть — сайт читає теку сам. Окремий файл маршруту не потрібен.
+Новий напрямок = новий об’єкт у `content/directions.jsonc` (slug, href кнопки «Підтримати цей напрямок», тексти) і тека `public/work/<slug>/` з фото. `href` — будь-яка http(s)-адреса, не обов’язково банка з `donate.jsonc`. Шляхи до знімків у jsonc не пишуть — сайт читає теку сам. Окремий файл маршруту не потрібен.
 
 Маршрути: `/` (українська), `/en` (англійська), `/eng` — редірект на `/en`. Сторінка напрямку: `/napryamky/<slug>` і `/en/napryamky/<slug>`.
 

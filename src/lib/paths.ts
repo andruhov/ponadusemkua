@@ -10,7 +10,7 @@ export function directionPath(locale: Locale, slug: string) {
   return locale === "en" ? `/en/${DIRECTIONS_PREFIX}/${slug}` : `/${DIRECTIONS_PREFIX}/${slug}`;
 }
 
-/** Map /napryamky/sitky ↔ /en/napryamky/sitky and / ↔ /en. */
+/** Map /napryamky/camo ↔ /en/napryamky/camo and / ↔ /en. */
 export function siblingLocalePath(pathname: string, target: Locale) {
   const clean = pathname.replace(/\/+$/, "") || "/";
   const rest = clean.replace(/^\/en(?=\/|$)/, "") || "/";

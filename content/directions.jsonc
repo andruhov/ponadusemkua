@@ -2,19 +2,19 @@
 //
 // Як додати новий напрямок:
 // 1. Скопіюйте один об’єкт { … } і вставте його в список.
-// 2. Придумайте slug латиницею (produkty, sitky…). Це адреса сторінки:
+// 2. Придумайте slug латиницею (supplies, camo…). Це адреса сторінки:
 //      /napryamky/ваш-slug     і     /en/napryamky/ваш-slug
 // 3. jar — id банки з donate.jsonc (military, nets, warehouse, fuel, civilians).
-// 4. images — шляхи до фото від кореня сайту (файли лежать у public/).
-//    Перше фото = обкладинка на головній і на сторінці напрямку.
-//    Нові знімки кладіть у public/work/ або public/slideshow/ і допишіть шлях сюди.
+// 4. Фото покладіть у public/work/ваш-slug/ (назва теки = slug).
+//    Сайт підхопить усі .jpg/.png/… сам — шляхи тут не пишіть.
+//    Перше фото за алфавітом = обкладинка. Зручно нумерувати: 01-..., 02-...
 // 5. Завжди заповнюйте і uk, і en. Порядок у списку = порядок карток на головній.
 //
 // Після збереження dev-сервер підхопить зміни. Для GitHub Pages потрібен пуш у main.
 
 [
   {
-    "slug": "produkty",
+    "slug": "supplies",
     "jar": "military",
     "title": { "uk": "Продукти для військових", "en": "Food for soldiers" },
     "lead": {
@@ -34,16 +34,10 @@
         "uk": "Підтримайте військовий збір — з нього ми закриваємо закупівлі, коли гуманітарки не вистачає, і оплачуємо доставку.",
         "en": "Support the military fund: it covers purchases when donated food is not enough, and it pays for delivery."
       }
-    ],
-    "images": [
-      "/work/11-hygiene-kherson.jpg",
-      "/work/05-aid-boxes.jpg",
-      "/work/17-aid-pack.jpg",
-      "/work/07-ukrposhta-1.jpg"
     ]
   },
   {
-    "slug": "shyny",
+    "slug": "tires",
     "jar": "military",
     "title": { "uk": "Шини для військових", "en": "Tires for soldiers" },
     "lead": {
@@ -63,15 +57,10 @@
         "uk": "Якщо бачите збір на шини в Telegram — це той самий напрямок. На сайті його підтримує військовий збір.",
         "en": "If you see a tire fundraiser on Telegram, it is this same line of work. On the website it is backed by the military fund."
       }
-    ],
-    "images": [
-      "/work/03-aid-to-soldiers.jpg",
-      "/work/18-van-loaded-1.jpg",
-      "/work/19-van-loaded-2.jpg"
     ]
   },
   {
-    "slug": "sitky",
+    "slug": "camo",
     "jar": "nets",
     "title": { "uk": "Маскувальні сітки", "en": "Camouflage nets" },
     "lead": {
@@ -91,13 +80,10 @@
         "uk": "Окремий збір на сітки зроблений постійним: нові запити приходять щотижня. Донат сюди йде на матеріал, а не на «звітний» хвіст.",
         "en": "The net fund is standing: new requests arrive every week. A donation here buys material, not a paperwork tail."
       }
-    ],
-    "images": [
-      "/slideshow/photo_2025-02-22_14-35-05.jpg"
     ]
   },
   {
-    "slug": "litni",
+    "slug": "elderly",
     "jar": "civilians",
     "title": { "uk": "Допомога літнім людям", "en": "Help for older people" },
     "lead": {
@@ -117,16 +103,10 @@
         "uk": "Збір «Допомога цивільним» якраз на це: їжа і необхідне для мешканців області та переселенців, серед яких багато літніх людей.",
         "en": "The civilian fund is for this: food and essentials for people in the region and for displaced families, many of them older."
       }
-    ],
-    "images": [
-      "/work/18-van-loaded-1.jpg",
-      "/work/10-medicine.jpg",
-      "/work/14-hygiene-med.jpg",
-      "/work/07-ukrposhta-1.jpg"
     ]
   },
   {
-    "slug": "svyata",
+    "slug": "children",
     "jar": "civilians",
     "title": { "uk": "Організація свят для дітей", "en": "Holidays for children" },
     "lead": {
@@ -146,13 +126,10 @@
         "uk": "Гроші на це йдуть зі збору для цивільних і з окремих донатів друзів фонду. Якщо хочете закрити саме дитяче свято — напишіть нам у Telegram, підженемо під конкретну дату.",
         "en": "This is paid from the civilian fund and from gifts from friends of the organisation. If you want to cover a children’s holiday in particular, write to us on Telegram and we will match it to a date."
       }
-    ],
-    "images": [
-      "/slideshow/photo_2025-02-22_15-54-17.jpg"
     ]
   },
   {
-    "slug": "zyma",
+    "slug": "winter",
     "jar": "civilians",
     "title": { "uk": "Підготовка до важкої зими", "en": "Preparing for a hard winter" },
     "lead": {
@@ -172,11 +149,6 @@
         "uk": "Підтримати підготовку до зими можна збором для цивільних. Якщо запит військовий (форма, свічки, гума) — він іде через військовий збір; обидва потрібні одночасно.",
         "en": "You can back winter preparation through the civilian fund. Soldier requests (uniforms, candles, tyres) go through the military fund; both are needed at once."
       }
-    ],
-    "images": [
-      "/slideshow/photo_2023-11-24_11-40-56 (1).jpg",
-      "/work/12-blankets-1.jpg",
-      "/work/13-blankets-2.jpg"
     ]
   }
 ]

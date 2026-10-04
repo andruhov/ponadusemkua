@@ -35,7 +35,17 @@ export function JarsSection({ locale }: { locale: Locale }) {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="font-display text-xl font-medium text-fg">{jar.title[locale]}</h3>
+                  <h3 className="font-display text-xl font-medium">
+                    <a
+                      href={jar.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-fg underline-offset-4 hover:text-accent hover:underline"
+                    >
+                      {jar.title[locale]}
+                      <NewWindow locale={locale} />
+                    </a>
+                  </h3>
                   <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted">{jar.text[locale]}</p>
                 </div>
               </div>

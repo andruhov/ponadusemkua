@@ -1,6 +1,7 @@
 import { parseJsonc } from "../../scripts/parse-jsonc.mjs";
 import directionsRaw from "../../content/directions.jsonc?raw";
 import { jars, type Jar, type Text } from "@/lib/content";
+import { directionImages } from "./gallery.gen";
 
 export type Direction = {
   slug: string;
@@ -34,7 +35,7 @@ function parseDirections(raw: string): Direction[] {
     if (!item || typeof item !== "object") fail(`[${i}] expected an object`);
     const row = item as Record<string, unknown>;
     if (typeof row.slug !== "string" || !SLUG.test(row.slug)) {
-      fail(`[${i}].slug must be lowercase latin (produkty, sitky)`);
+      fail(`[${i}].slug must be lowercase latin (supplies, camo)`);
     }
     if (seen.has(row.slug)) fail(`duplicate slug "${row.slug}"`);
     seen.add(row.slug);
@@ -46,8 +47,9 @@ function parseDirections(raw: string): Direction[] {
     if (!Array.isArray(row.body) || row.body.length === 0 || !row.body.every(isText)) {
       fail(`[${i}].body`);
     }
-    if (!Array.isArray(row.images) || !row.images.every((p) => typeof p === "string" && p.startsWith("/"))) {
-      fail(`[${i}].images — paths like /work/photo.jpg`);
+    const images = (directionImages[row.slug] ?? []).map((file) => file.src);
+    if (images.length === 0) {
+      fail(`[${i}] no photos in public/work/${row.slug}/ — put at least one image there`);
     }
     return {
       slug: row.slug,
@@ -55,7 +57,7 @@ function parseDirections(raw: string): Direction[] {
       title: row.title,
       lead: row.lead,
       body: row.body,
-      images: row.images,
+      images,
     };
   });
 }

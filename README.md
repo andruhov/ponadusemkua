@@ -13,9 +13,9 @@
 | `content/strings.jsonc` | Тексти українською й англійською |
 | `content/donate.jsonc` | Банки, картки, крипта, PDF |
 | `content/socials.jsonc` | Посилання на соцмережі |
-| `content/directions.jsonc` | Напрямки роботи (сторінки + фото + збір) |
+| `content/directions.jsonc` | Напрямки роботи (сторінки + збір) |
 
-Фото кладіть у `public/work/` і `public/slideshow/` (перший екран). PDF — у `public/pdf/`. Новий напрямок додається об’єктом у `content/directions.jsonc`.
+Фото напрямків — у `public/work/<slug>/` (сайт підхопить файли сам). Слайди першого екрана — у `public/slideshow/`. PDF — у `public/pdf/`. Новий напрямок: об’єкт у `content/directions.jsonc` і тека з фото.
 
 ## Локально
 

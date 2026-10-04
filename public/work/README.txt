@@ -2,7 +2,7 @@
 =======================
 
 Одна підтека = один напрямок. Назва теки = slug з content/directions.jsonc
-(наприклад public/work/supplies/ для /napryamky/supplies).
+(наприклад public/work/supplies/ для /aid/supplies).
 
 Покладіть сюди знімки (.jpg .jpeg .png .webp .gif .avif).
 Сайт підхопить їх сам — шляхи в коді чи jsonc прописувати не треба.

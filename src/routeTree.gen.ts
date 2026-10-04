@@ -12,8 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as EngRouteImport } from './routes/eng'
-import { Route as NapryamkySlugRouteImport } from './routes/napryamky.$slug'
-import { Route as EnNapryamkySlugRouteImport } from './routes/en_.napryamky.$slug'
+import { Route as AidSlugRouteImport } from './routes/aid.$slug'
+import { Route as EnAidSlugRouteImport } from './routes/en_.aid.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,14 +30,14 @@ const EngRoute = EngRouteImport.update({
   path: '/eng',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NapryamkySlugRoute = NapryamkySlugRouteImport.update({
-  id: '/napryamky/$slug',
-  path: '/napryamky/$slug',
+const AidSlugRoute = AidSlugRouteImport.update({
+  id: '/aid/$slug',
+  path: '/aid/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EnNapryamkySlugRoute = EnNapryamkySlugRouteImport.update({
-  id: '/en_/napryamky/$slug',
-  path: '/en/napryamky/$slug',
+const EnAidSlugRoute = EnAidSlugRouteImport.update({
+  id: '/en_/aid/$slug',
+  path: '/en/aid/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -45,44 +45,38 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/en': typeof EnRoute
   '/eng': typeof EngRoute
-  '/napryamky/$slug': typeof NapryamkySlugRoute
-  '/en/napryamky/$slug': typeof EnNapryamkySlugRoute
+  '/aid/$slug': typeof AidSlugRoute
+  '/en/aid/$slug': typeof EnAidSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/en': typeof EnRoute
   '/eng': typeof EngRoute
-  '/napryamky/$slug': typeof NapryamkySlugRoute
-  '/en/napryamky/$slug': typeof EnNapryamkySlugRoute
+  '/aid/$slug': typeof AidSlugRoute
+  '/en/aid/$slug': typeof EnAidSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/en': typeof EnRoute
   '/eng': typeof EngRoute
-  '/napryamky/$slug': typeof NapryamkySlugRoute
-  '/en_/napryamky/$slug': typeof EnNapryamkySlugRoute
+  '/aid/$slug': typeof AidSlugRoute
+  '/en_/aid/$slug': typeof EnAidSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/en' | '/eng' | '/napryamky/$slug' | '/en/napryamky/$slug'
+  fullPaths: '/' | '/en' | '/eng' | '/aid/$slug' | '/en/aid/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/en' | '/eng' | '/napryamky/$slug' | '/en/napryamky/$slug'
-  id:
-    | '__root__'
-    | '/'
-    | '/en'
-    | '/eng'
-    | '/napryamky/$slug'
-    | '/en_/napryamky/$slug'
+  to: '/' | '/en' | '/eng' | '/aid/$slug' | '/en/aid/$slug'
+  id: '__root__' | '/' | '/en' | '/eng' | '/aid/$slug' | '/en_/aid/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EnRoute: typeof EnRoute
   EngRoute: typeof EngRoute
-  NapryamkySlugRoute: typeof NapryamkySlugRoute
-  EnNapryamkySlugRoute: typeof EnNapryamkySlugRoute
+  AidSlugRoute: typeof AidSlugRoute
+  EnAidSlugRoute: typeof EnAidSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -108,18 +102,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EngRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/napryamky/$slug': {
-      id: '/napryamky/$slug'
-      path: '/napryamky/$slug'
-      fullPath: '/napryamky/$slug'
-      preLoaderRoute: typeof NapryamkySlugRouteImport
+    '/aid/$slug': {
+      id: '/aid/$slug'
+      path: '/aid/$slug'
+      fullPath: '/aid/$slug'
+      preLoaderRoute: typeof AidSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/en_/napryamky/$slug': {
-      id: '/en_/napryamky/$slug'
-      path: '/en/napryamky/$slug'
-      fullPath: '/en/napryamky/$slug'
-      preLoaderRoute: typeof EnNapryamkySlugRouteImport
+    '/en_/aid/$slug': {
+      id: '/en_/aid/$slug'
+      path: '/en/aid/$slug'
+      fullPath: '/en/aid/$slug'
+      preLoaderRoute: typeof EnAidSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -129,8 +123,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EnRoute: EnRoute,
   EngRoute: EngRoute,
-  NapryamkySlugRoute: NapryamkySlugRoute,
-  EnNapryamkySlugRoute: EnNapryamkySlugRoute,
+  AidSlugRoute: AidSlugRoute,
+  EnAidSlugRoute: EnAidSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

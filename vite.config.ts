@@ -22,8 +22,8 @@ function directionPrerenderPages() {
     const slug = row && typeof row === "object" && "slug" in row ? String(row.slug) : "";
     if (!slug) return [];
     return [
-      { path: `/napryamky/${slug}`, prerender: { enabled: true } },
-      { path: `/en/napryamky/${slug}`, prerender: { enabled: true } },
+      { path: `/aid/${slug}`, prerender: { enabled: true } },
+      { path: `/en/aid/${slug}`, prerender: { enabled: true } },
     ];
   });
 }

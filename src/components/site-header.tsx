@@ -143,7 +143,7 @@ function LangSwitch({ locale }: { locale: Locale }) {
       {locale === "uk" ? (
         <span className="rounded-sm bg-surface-2 px-2 py-1 text-fg">{c.langUk}</span>
       ) : slug ? (
-        <Link to="/napryamky/$slug" params={{ slug }} className="px-2 py-1 text-muted hover:text-fg">
+        <Link to="/aid/$slug" params={{ slug }} className="px-2 py-1 text-muted hover:text-fg">
           {c.langUk}
         </Link>
       ) : (
@@ -155,7 +155,7 @@ function LangSwitch({ locale }: { locale: Locale }) {
         <span className="rounded-sm bg-surface-2 px-2 py-1 text-fg">{c.langEn}</span>
       ) : slug ? (
         <Link
-          to="/en/napryamky/$slug"
+          to="/en/aid/$slug"
           params={{ slug }}
           className="px-2 py-1 text-muted hover:text-fg"
         >

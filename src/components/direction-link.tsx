@@ -15,13 +15,13 @@ export function DirectionLink({
 }) {
   if (locale === "en") {
     return (
-      <Link to="/en/napryamky/$slug" params={{ slug }} className={className}>
+      <Link to="/en/aid/$slug" params={{ slug }} className={className}>
         {children}
       </Link>
     );
   }
   return (
-    <Link to="/napryamky/$slug" params={{ slug }} className={className}>
+    <Link to="/aid/$slug" params={{ slug }} className={className}>
       {children}
     </Link>
   );

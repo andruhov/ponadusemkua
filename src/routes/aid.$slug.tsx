@@ -3,7 +3,7 @@ import { DirectionNotFound, DirectionPage } from "@/components/direction-page";
 import { directionBySlug } from "@/lib/directions";
 import { directionHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/napryamky/$slug")({
+export const Route = createFileRoute("/aid/$slug")({
   loader: ({ params }) => {
     const direction = directionBySlug(params.slug);
     if (!direction) throw notFound();

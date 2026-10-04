@@ -15,77 +15,26 @@ function listImages(dir, urlPrefix) {
     .map((name) => ({ src: `${urlPrefix}/${name}`, name }));
 }
 
-function readCaptions(file) {
-  const byName = new Map();
-  const byIndex = new Map();
-  if (!fs.existsSync(file)) return { byName, byIndex };
-  const text = fs.readFileSync(file, "utf8");
-  for (const raw of text.split(/\r?\n/)) {
-    const line = raw.trim();
-    if (!line || line.startsWith("#")) continue;
-    const parts = line.split("|").map((s) => s.trim());
-    if (parts.length < 2) continue;
-    if (parts[0] === "n" || parts[0] === "ім'я-файлу.jpg") continue;
-    const cap = {
-      captionUk: parts[1] ?? "",
-      captionEn: parts[2] ?? "",
-      urlUk: parts[3] ?? "",
-      urlEn: parts[4] ?? "",
-    };
-    const key = parts[0];
-    const n = Number(key);
-    if (Number.isInteger(n) && n >= 1 && !key.includes(".")) {
-      byIndex.set(n, cap);
-    } else {
-      byName.set(key, cap);
-    }
-  }
-  return { byName, byIndex };
-}
-
 export function writeGalleryManifest(root) {
   const slideshowDir = path.join(root, "public/slideshow");
-  const workDir = path.join(root, "public/work");
-  const captionsFile = path.join(root, "content/gallery-captions.txt");
   fs.mkdirSync(slideshowDir, { recursive: true });
-  fs.mkdirSync(workDir, { recursive: true });
 
   const slideshowImages = listImages(slideshowDir, "/slideshow");
-  const { byName, byIndex } = readCaptions(captionsFile);
-  const workImages = listImages(workDir, "/work").map((img, i) => {
-    const cap = byName.get(img.name) ?? byIndex.get(i + 1) ?? {};
-    return {
-      ...img,
-      n: i + 1,
-      captionUk: cap.captionUk ?? "",
-      captionEn: cap.captionEn ?? "",
-      urlUk: cap.urlUk ?? "",
-      urlEn: cap.urlEn ?? "",
-    };
-  });
 
   const out = path.join(root, "src/lib/gallery.gen.ts");
   const body =
     `/* eslint-disable */\n` +
-    `// Generated from public/slideshow, public/work and content/gallery-captions.txt — do not edit.\n` +
+    `// Generated from public/slideshow — do not edit.\n` +
     `export type GalleryFile = {\n` +
     `  src: string;\n` +
     `  name: string;\n` +
     `};\n\n` +
-    `export type WorkFile = GalleryFile & {\n` +
-    `  n: number;\n` +
-    `  captionUk: string;\n` +
-    `  captionEn: string;\n` +
-    `  urlUk: string;\n` +
-    `  urlEn: string;\n` +
-    `};\n\n` +
-    `export const slideshowImages: GalleryFile[] = ${JSON.stringify(slideshowImages, null, 2)};\n\n` +
-    `export const workImages: WorkFile[] = ${JSON.stringify(workImages, null, 2)};\n`;
+    `export const slideshowImages: GalleryFile[] = ${JSON.stringify(slideshowImages, null, 2)};\n`;
 
   fs.mkdirSync(path.dirname(out), { recursive: true });
   const prev = fs.existsSync(out) ? fs.readFileSync(out, "utf8") : "";
   if (prev !== body) fs.writeFileSync(out, body);
-  return { slideshow: slideshowImages.length, work: workImages.length };
+  return { slideshow: slideshowImages.length };
 }
 
 export function galleryPlugin() {
@@ -98,19 +47,11 @@ export function galleryPlugin() {
     },
     configureServer(server) {
       const slideshowDir = path.join(rootDir, "public/slideshow");
-      const workDir = path.join(rootDir, "public/work");
-      const captionsFile = path.join(rootDir, "content/gallery-captions.txt");
-      const contentDir = path.join(rootDir, "content");
       fs.mkdirSync(slideshowDir, { recursive: true });
-      fs.mkdirSync(workDir, { recursive: true });
       server.watcher.add(slideshowDir);
-      server.watcher.add(workDir);
-      server.watcher.add(contentDir);
       const onFs = (file) => {
         const inSlide = !path.relative(slideshowDir, file).startsWith("..");
-        const inWork = !path.relative(workDir, file).startsWith("..");
-        const isCaptions = path.resolve(file) === path.resolve(captionsFile);
-        if (!inSlide && !inWork && !isCaptions) return;
+        if (!inSlide) return;
         writeGalleryManifest(rootDir);
         server.ws.send({ type: "full-reload" });
       };

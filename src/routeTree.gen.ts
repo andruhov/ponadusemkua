@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as EngRouteImport } from './routes/eng'
+import { Route as NapryamkySlugRouteImport } from './routes/napryamky.$slug'
+import { Route as EnNapryamkySlugRouteImport } from './routes/en_.napryamky.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +30,59 @@ const EngRoute = EngRouteImport.update({
   path: '/eng',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NapryamkySlugRoute = NapryamkySlugRouteImport.update({
+  id: '/napryamky/$slug',
+  path: '/napryamky/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnNapryamkySlugRoute = EnNapryamkySlugRouteImport.update({
+  id: '/en_/napryamky/$slug',
+  path: '/en/napryamky/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/en': typeof EnRoute
   '/eng': typeof EngRoute
+  '/napryamky/$slug': typeof NapryamkySlugRoute
+  '/en/napryamky/$slug': typeof EnNapryamkySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/en': typeof EnRoute
   '/eng': typeof EngRoute
+  '/napryamky/$slug': typeof NapryamkySlugRoute
+  '/en/napryamky/$slug': typeof EnNapryamkySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/en': typeof EnRoute
   '/eng': typeof EngRoute
+  '/napryamky/$slug': typeof NapryamkySlugRoute
+  '/en_/napryamky/$slug': typeof EnNapryamkySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/en' | '/eng'
+  fullPaths: '/' | '/en' | '/eng' | '/napryamky/$slug' | '/en/napryamky/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/en' | '/eng'
-  id: '__root__' | '/' | '/en' | '/eng'
+  to: '/' | '/en' | '/eng' | '/napryamky/$slug' | '/en/napryamky/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/en'
+    | '/eng'
+    | '/napryamky/$slug'
+    | '/en_/napryamky/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EnRoute: typeof EnRoute
   EngRoute: typeof EngRoute
+  NapryamkySlugRoute: typeof NapryamkySlugRoute
+  EnNapryamkySlugRoute: typeof EnNapryamkySlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +108,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EngRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/napryamky/$slug': {
+      id: '/napryamky/$slug'
+      path: '/napryamky/$slug'
+      fullPath: '/napryamky/$slug'
+      preLoaderRoute: typeof NapryamkySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en_/napryamky/$slug': {
+      id: '/en_/napryamky/$slug'
+      path: '/en/napryamky/$slug'
+      fullPath: '/en/napryamky/$slug'
+      preLoaderRoute: typeof EnNapryamkySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +129,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EnRoute: EnRoute,
   EngRoute: EngRoute,
+  NapryamkySlugRoute: NapryamkySlugRoute,
+  EnNapryamkySlugRoute: EnNapryamkySlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { slideshowImages } from "@/lib/gallery";
 import { t, type Locale } from "@/lib/content";
-import { asset, cn } from "@/lib/utils";
+import { cn, mediaAsset } from "@/lib/utils";
 
 const INTERVAL = 5500;
 
@@ -40,7 +40,7 @@ export function HeroSlideshow({ locale }: { locale: Locale }) {
     const next = images[(index + 1) % images.length];
     if (!next) return;
     const img = new Image();
-    img.src = asset(next.src);
+    img.src = mediaAsset(next.src);
   }, [index, images]);
 
   if (images.length === 0) {
@@ -81,7 +81,7 @@ export function HeroSlideshow({ locale }: { locale: Locale }) {
             aria-hidden={i !== index}
           >
             <img
-              src={asset(img.src)}
+              src={mediaAsset(img.src)}
               alt=""
               className="absolute inset-0 size-full object-cover"
               draggable={false}

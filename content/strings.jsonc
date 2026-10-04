@@ -28,10 +28,10 @@
   },
   "lede": {
     "uk": "Допомагаємо цивільним і переселенцям. Закуповуємо спорядження для військових, які захищають нашу країну.",
-    "en": "We help civilians and displaced people survive the war, and we buy life-saving equipment for those who defend the city."
+    "en": "We help local civilians and displaced people survive the war, and we buy life-saving equipment for those who defend the city."
   },
   "heroCta": { "uk": "Підтримати", "en": "Donate" },
-  "heroWork": { "uk": "Наша робота", "en": "Our work" },
+  "heroWork": { "uk": "Напрямки роботи", "en": "Our work" },
 
   // Розділ «Хто ми».
   "aboutTitle": { "uk": "Хто ми", "en": "Who we are" },
@@ -48,24 +48,33 @@
     "en": "Your donations can — and will — save lives. Literally."
   },
 
-  // Розділ «Наша робота» (сітка фото).
-  "workTitle": { "uk": "Наша робота", "en": "Our work" },
+  // Розділ «Напрямки нашої роботи» (картки → внутрішні сторінки).
+  "workTitle": { "uk": "Напрямки нашої роботи", "en": "What we do" },
   "workLead": {
-    "uk": "Фотозвіти з виїздів і передач допомоги. Підпис під знімком відкриває відповідний допис у Telegram.",
-    "en": "Photo reports from our deliveries. Each caption opens the matching Telegram post."
+    "uk": "Дізнайтеся більше про те, як саме ми допомагаємо людям.",
+    "en": "Learn more about our humanitarian work."
   },
   "emptyGallery": {
     "uk": "Фотозвіти з’являться тут найближчим часом.",
     "en": "Photo reports will appear here soon."
   },
-  "seeMore": { "uk": "Дивитися більше", "en": "See more" },
+  "seeMore": { "uk": "Фотозвіти в Telegram", "en": "Photo reports on Telegram" },
+  "readMore": { "uk": "Детальніше", "en": "Read more" },
+  "backToWork": { "uk": "Усі напрямки", "en": "All directions" },
+  "supportDirection": { "uk": "Підтримати цей напрямок", "en": "Support this work" },
+  "otherDirections": { "uk": "Інші напрямки", "en": "Other directions" },
+  "directionNotFound": { "uk": "Такого напрямку немає", "en": "This page is missing" },
+  "directionNotFoundLead": {
+    "uk": "Поверніться до списку напрямків на головній сторінці.",
+    "en": "Go back to the list of our work on the home page."
+  },
   "openPhoto": { "uk": "Відкрити фото", "en": "Open photo" },
 
   // Соцмережі (підвал). Самі посилання — у socials.jsonc.
   "socialTitle": { "uk": "Соцмережі", "en": "Social" },
   "socialLead": {
     "uk": "Звіти по зборах і закупівлях ми викладаємо на наших сторінках. Підпишіться, щоб не пропустити важливе.",
-    "en": "Most posts are in Ukrainian; automatic translation should help. This is where we publish purchase reports."
+    "en": "This is our socials, where we report on our activities. Most posts are in Ukrainian; automatic translation should help."
   },
   "thanks": {
     "uk": "Дякуємо всім, хто допомагає та підтримує.",
@@ -73,7 +82,7 @@
   },
 
   // Розділ банок Monobank.
-  "jarsTitle": { "uk": "На що збираємо зараз", "en": "What we are raising now" },
+  "jarsTitle": { "uk": "Наші постійні збори", "en": "Ongoing fundraisers" },
   "jarsLead": {
     "uk": "Звіти по зборах і закупівлях викладаємо в соцмережах. Відкрийте банку, щоб допомогти конкретному напрямку.",
     "en": "We publish reports on our social pages. Open a jar to support a specific need."
@@ -81,10 +90,10 @@
   "openJar": { "uk": "Відкрити банку", "en": "Open jar" },
 
   // Розділ реквізитів (вкладки).
-  "donateTitle": { "uk": "Реквізити", "en": "How to help" },
+  "donateTitle": { "uk": "Реквізити", "en": "Ways to donate" },
   "donateLead": {
     "uk": "Картки, банківські рахунки або крипта — оберіть зручний спосіб.",
-    "en": "Cards, bank wire, or crypto — use whichever is easiest."
+    "en": "Cards, bank wire, or crypto — choose what works for you."
   },
   "tabCards": { "uk": "Картки", "en": "Cards" },
   "tabBank": { "uk": "Рахунки", "en": "Bank" },
@@ -92,7 +101,7 @@
   "tabAnon": { "uk": "Анонімно", "en": "Anonymous" },
   "bankLead": {
     "uk": "Реквізити рахунків у PDF — USD, EUR і гривня.",
-    "en": "Bank details as PDF — USD, EUR and hryvnia."
+    "en": "Bank details as PDF — USD, EUR and UAH."
   },
   "downloadPdf": { "uk": "Завантажити", "en": "Download" },
   "cryptoLead": {
@@ -100,13 +109,13 @@
     "en": "Tap a row to copy the address."
   },
   "anonLead": {
-    "uk": "Monero — для переказів без публічної історії.",
-    "en": "Monero — for transfers without a public history."
+    "uk": "Monero — для анонімнихпереказів без публічної історії.",
+    "en": "Monero — for anonymous transfers without a public history."
   },
 
   // Шапка, меню, підписи кнопок інтерфейсу.
   "navAbout": { "uk": "Про нас", "en": "About" },
-  "navWork": { "uk": "Робота", "en": "Work" },
+  "navWork": { "uk": "Що ми робимо", "en": "Work" },
   "navJars": { "uk": "Збори", "en": "Funds" },
   "navDonate": { "uk": "Реквізити", "en": "Details" },
   "menu": { "uk": "Меню", "en": "Menu" },

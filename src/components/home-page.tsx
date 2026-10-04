@@ -1,5 +1,5 @@
 import { DonateSection, JarsSection } from "@/components/donate-section";
-import { GallerySection } from "@/components/gallery-section";
+import { DirectionsSection } from "@/components/directions-section";
 import { HeroSlideshow } from "@/components/hero-slideshow";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -62,7 +62,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <GallerySection locale={locale} />
+      <DirectionsSection locale={locale} />
       <JarsSection locale={locale} />
       <DonateSection locale={locale} />
       <SiteFooter locale={locale} />

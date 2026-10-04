@@ -1,0 +1,182 @@
+// Напрямки роботи. Кожен об’єкт = одна внутрішня сторінка.
+//
+// Як додати новий напрямок:
+// 1. Скопіюйте один об’єкт { … } і вставте його в список.
+// 2. Придумайте slug латиницею (produkty, sitky…). Це адреса сторінки:
+//      /napryamky/ваш-slug     і     /en/napryamky/ваш-slug
+// 3. jar — id банки з donate.jsonc (military, nets, warehouse, fuel, civilians).
+// 4. images — шляхи до фото від кореня сайту (файли лежать у public/).
+//    Перше фото = обкладинка на головній і на сторінці напрямку.
+//    Нові знімки кладіть у public/work/ або public/slideshow/ і допишіть шлях сюди.
+// 5. Завжди заповнюйте і uk, і en. Порядок у списку = порядок карток на головній.
+//
+// Після збереження dev-сервер підхопить зміни. Для GitHub Pages потрібен пуш у main.
+
+[
+  {
+    "slug": "produkty",
+    "jar": "military",
+    "title": { "uk": "Продукти для військових", "en": "Food for soldiers" },
+    "lead": {
+      "uk": "Регулярно передаємо свіжі продукти підрозділам, які стоять на Миколаївському та Херсонському напрямках.",
+      "en": "We regularly deliver fresh food to units on the Mykolaiv and Kherson fronts."
+    },
+    "body": [
+      {
+        "uk": "Бійцям потрібне не лише спорядження. На позиціях бракує звичайної їжі: крупи, консервація, овочі, смаколики, які нагадують про дім. Ми збираємо продуктові партії на складі в Миколаєві і віддаємо їх безпосередньо військовим — вони приїжджають самі або ми веземо вантаж на напрямок.",
+        "en": "Soldiers need more than gear. Positions often lack ordinary food: grains, canned goods, vegetables, and small treats that taste like home. We assemble food lots at our warehouse in Mykolaiv and hand them to the units — either they collect the load or we drive it to the line."
+      },
+      {
+        "uk": "Велику частину свіжих продуктів нам регулярно надсилають люди з Лісків на Кілійщині, зокрема подружжя Гофман. Допомагають також отець Анатолій з Чернечого дому святого Вікентія Де Поля, волонтери Укрпошти та інші друзі фонду. Наша робота тут — прийняти, розсортувати, довантажити те, чого бракує, і довезти.",
+        "en": "A large share of the fresh food comes from people in Lisky, Kiliya district — including the Hoffman family. Father Anatoliy of the Vincent de Paul monastery house, Ukrposhta volunteers, and other friends of the fund help too. Our job is to receive, sort, fill the gaps, and deliver."
+      },
+      {
+        "uk": "Підтримайте військовий збір — з нього ми закриваємо закупівлі, коли гуманітарки не вистачає, і оплачуємо доставку.",
+        "en": "Support the military fund: it covers purchases when donated food is not enough, and it pays for delivery."
+      }
+    ],
+    "images": [
+      "/work/11-hygiene-kherson.jpg",
+      "/work/05-aid-boxes.jpg",
+      "/work/17-aid-pack.jpg",
+      "/work/07-ukrposhta-1.jpg"
+    ]
+  },
+  {
+    "slug": "shyny",
+    "jar": "military",
+    "title": { "uk": "Шини для військових", "en": "Tires for soldiers" },
+    "lead": {
+      "uk": "Купуємо й передаємо шини для автівок на передовій — без них евакуація і логістика стають небезпечними.",
+      "en": "We buy and deliver tires for vehicles at the front — without them, evacuation and supply runs become dangerous."
+    },
+    "body": [
+      {
+        "uk": "Військові автівки їздять розбитими дорогами, полями і під обстрілами. Шини зношуються швидко, а «перевзути» машину на позиціях часто ніде й нізащо. Ми закуповуємо потрібний розмір і віддаємо комплекти підрозділам, які до нас звертаються.",
+        "en": "Military vehicles run on wrecked roads, across fields, and under fire. Tires wear out fast, and there is often nowhere to replace them at the position. We buy the size they ask for and hand over complete sets."
+      },
+      {
+        "uk": "Регулярно беремо гуму в перевіреного постачальника в Миколаєві — пан Гарик тримає для нас робочі ціни. Завдяки донатам, зокрема пана Анонімного котика, можемо закривати запити без довгої паузи.",
+        "en": "We regularly buy from a trusted supplier in Mykolaiv — Mr. Garyk keeps working prices for us. Donations, including from our Anonymous Cat, let us close requests without a long delay."
+      },
+      {
+        "uk": "Якщо бачите збір на шини в Telegram — це той самий напрямок. На сайті його підтримує військовий збір.",
+        "en": "If you see a tire fundraiser on Telegram, it is this same line of work. On the website it is backed by the military fund."
+      }
+    ],
+    "images": [
+      "/work/03-aid-to-soldiers.jpg",
+      "/work/18-van-loaded-1.jpg",
+      "/work/19-van-loaded-2.jpg"
+    ]
+  },
+  {
+    "slug": "sitky",
+    "jar": "nets",
+    "title": { "uk": "Маскувальні сітки", "en": "Camouflage nets" },
+    "lead": {
+      "uk": "Наші волонтерки плетуть сітки для техніки і позицій. Збір закриває основи, тканину і все, без чого верстат стоїть.",
+      "en": "Our volunteers weave nets for vehicles and positions. The fund covers bases, fabric, and the materials without which the work stops."
+    },
+    "body": [
+      {
+        "uk": "Маскувальна сітка — один з найпростіших способів сховати техніку, бліндаж чи дорогу. Її не купиш у потрібній кількості на складі: колір, розмір і щільність залежать від сезону й запиту конкретної частини. Тому сітки плетуть руками.",
+        "en": "A camouflage net is one of the simplest ways to hide a vehicle, a dugout, or a road. You cannot buy the right quantity off a shelf: colour, size and density depend on the season and the unit. So the nets are woven by hand."
+      },
+      {
+        "uk": "Волонтерки працюють у Миколаєві постійно, інколи просто неба і в холод. На зиму потрібні білі сітки, на весну й літо — зелень і «болото». Ми закуповуємо основи й матеріал, забираємо готові полотна і передаємо їх військовим.",
+        "en": "Volunteers in Mykolaiv work year-round, sometimes outdoors in the cold. Winter needs white nets; spring and summer need green and marsh tones. We buy the bases and fabric, collect the finished sheets, and pass them to the units."
+      },
+      {
+        "uk": "Окремий збір на сітки зроблений постійним: нові запити приходять щотижня. Донат сюди йде на матеріал, а не на «звітний» хвіст.",
+        "en": "The net fund is standing: new requests arrive every week. A donation here buys material, not a paperwork tail."
+      }
+    ],
+    "images": [
+      "/slideshow/photo_2025-02-22_14-35-05.jpg"
+    ]
+  },
+  {
+    "slug": "litni",
+    "jar": "civilians",
+    "title": { "uk": "Допомога літнім людям", "en": "Help for older people" },
+    "lead": {
+      "uk": "Возимо продукти, гігієну й ліки пенсіонерам у Миколаєві та селах області, з яких майже ніхто не виїхав.",
+      "en": "We bring food, hygiene supplies and medicine to pensioners in Mykolaiv and in villages that almost no one else reaches."
+    },
+    "body": [
+      {
+        "uk": "У прифронтових селах Миколаївщини часто лишаються саме літні люди: їхати нікуди, сил мало, магазину немає. Те саме в окремих дворах міста після обстрілів. Ми возимо туди крупи, хліб, гігієну, побутову хімію і те, що просять адресно.",
+        "en": "In frontline villages of the Mykolaiv region it is often older people who stayed: nowhere to go, little strength, no shop. The same is true of some city yards after shelling. We bring grains, bread, hygiene products, household chemicals, and whatever was asked for by name."
+      },
+      {
+        "uk": "Такі виїзди робимо разом із друзями — «Надійний добробут інвалідів», «Моноліт», отець Анатолій, Карітас і парафії, які передають гуманітарку. Наша частина — склад, логістика і те, щоб допомога не осіла «десь у районі», а дійшла до конкретної людини.",
+        "en": "We make these trips with friends — Reliable Welfare of People with Disabilities, Monolit, Father Anatoliy, Caritas, and parishes that pass on aid. Our part is the warehouse, the logistics, and making sure the help does not stop “somewhere in the district” but reaches a specific person."
+      },
+      {
+        "uk": "Збір «Допомога цивільним» якраз на це: їжа і необхідне для мешканців області та переселенців, серед яких багато літніх людей.",
+        "en": "The civilian fund is for this: food and essentials for people in the region and for displaced families, many of them older."
+      }
+    ],
+    "images": [
+      "/work/18-van-loaded-1.jpg",
+      "/work/10-medicine.jpg",
+      "/work/14-hygiene-med.jpg",
+      "/work/07-ukrposhta-1.jpg"
+    ]
+  },
+  {
+    "slug": "svyata",
+    "jar": "civilians",
+    "title": { "uk": "Організація свят для дітей", "en": "Holidays for children" },
+    "lead": {
+      "uk": "Щороку влаштовуємо свята для дітей Миколаєва і сіл області — обережно, без гучних анонсів, зате з костюмами й подарунками.",
+      "en": "Every year we hold celebrations for children in Mykolaiv and nearby villages — quietly, without loud announcements, but with costumes and gifts."
+    },
+    "body": [
+      {
+        "uk": "Діти в прифронтовому місті теж мають право на свято. Ми не відмовляємось від цієї традиції: кінець навчального року, Миколай, інші дати, коли можна зібрати малечу і дати кілька годин звичайного дитинства.",
+        "en": "Children in a frontline city still have a right to a celebration. We keep this tradition: the end of the school year, St. Nicholas, and other days when we can gather the kids and give them a few hours of ordinary childhood."
+      },
+      {
+        "uk": "Робимо це обережно і без широких анонсів заздалегідь — щоб не світити місце й час. Свята проходили в Миколаєві і в селі Котляреве. Долучаються місцеві студії, прокат костюмів, фонди й просто небайдужі люди. Діти отримують подарунки, солодке, інколи — справжню програму з костюмами.",
+        "en": "We do it carefully, without a wide public notice in advance, so the place and time stay quiet. Celebrations have been held in Mykolaiv and in the village of Kotliareve. Local studios, costume rentals, funds and ordinary people join in. The children get gifts, sweets, and sometimes a full costume programme."
+      },
+      {
+        "uk": "Гроші на це йдуть зі збору для цивільних і з окремих донатів друзів фонду. Якщо хочете закрити саме дитяче свято — напишіть нам у Telegram, підженемо під конкретну дату.",
+        "en": "This is paid from the civilian fund and from gifts from friends of the organisation. If you want to cover a children’s holiday in particular, write to us on Telegram and we will match it to a date."
+      }
+    ],
+    "images": [
+      "/slideshow/photo_2025-02-22_15-54-17.jpg"
+    ]
+  },
+  {
+    "slug": "zyma",
+    "jar": "civilians",
+    "title": { "uk": "Підготовка до важкої зими", "en": "Preparing for a hard winter" },
+    "lead": {
+      "uk": "Ковдри, бушлати, окопні свічки, грілки, зимова гума — усе, без чого позиції і оселі не переживуть морози й відключення.",
+      "en": "Blankets, winter coats, trench candles, warmers, winter tyres — what positions and homes need to get through frost and blackouts."
+    },
+    "body": [
+      {
+        "uk": "Кожна зима війни важка інакше: обстріли енергетики, холод на позиціях, села без світла. Ми не чекаємо першого морозу. З осені закуповуємо ковдри, теплу форму, бушлати, окопні свічки, хімічні й електричні грілки, зимову гуму для автівок.",
+        "en": "Every winter of this war is hard in a different way: strikes on the power grid, cold at the positions, villages without light. We do not wait for the first frost. From autumn we buy blankets, warm uniforms, winter coats, trench candles, chemical and electric warmers, and winter tyres."
+      },
+      {
+        "uk": "Частину цього отримуємо гуманітаркою — той самий отець Анатолій передає ковдри й постіль, люди з Українки возять розпалювачі. Решту докуповуємо. На позиції йде одне, літнім людям у холодних хатах — інше, але склад і логістика ті самі.",
+        "en": "Some of this arrives as humanitarian aid — Father Anatoliy sends blankets and bedding, people from Ukrainka bring firelighters. We buy the rest. Positions need one set of things, older people in cold houses another, but the warehouse and the vans are the same."
+      },
+      {
+        "uk": "Підтримати підготовку до зими можна збором для цивільних. Якщо запит військовий (форма, свічки, гума) — він іде через військовий збір; обидва потрібні одночасно.",
+        "en": "You can back winter preparation through the civilian fund. Soldier requests (uniforms, candles, tyres) go through the military fund; both are needed at once."
+      }
+    ],
+    "images": [
+      "/slideshow/photo_2023-11-24_11-40-56 (1).jpg",
+      "/work/12-blankets-1.jpg",
+      "/work/13-blankets-2.jpg"
+    ]
+  }
+]
